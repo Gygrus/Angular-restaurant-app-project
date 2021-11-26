@@ -1,0 +1,7 @@
+<div id="container">
+    <div class = "section clickable" (click) = paginInfo.pageFirst()>&#8810;</div>
+    <div class = "section clickable" (click) = paginInfo.pagePrev()>&#60;</div>
+    <div class = "section">{{paginInfo.currentPage}}/{{paginInfo.getMaxPage()}}</div>
+    <div class = "section clickable" (click) = paginInfo.pageNext()>&#62;</div>
+    <div class = "section clickable" (click) = paginInfo.pageLast()>&#8811;</div>
+</div>

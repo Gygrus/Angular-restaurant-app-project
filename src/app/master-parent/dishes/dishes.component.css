@@ -1,0 +1,19 @@
+#dishesContainer{
+    max-width: 1200px;
+    width: 100vw;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.isMax {
+    border: 2px solid green;
+    box-shadow: green;
+}
+
+.isMin {
+    border: 2px solid red;
+    box-shadow: red;
+}

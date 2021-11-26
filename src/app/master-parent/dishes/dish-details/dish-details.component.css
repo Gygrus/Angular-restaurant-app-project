@@ -1,0 +1,243 @@
+#wrapper {
+    display: flex;
+    box-shadow: 5px 5px 20px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.container {
+    margin: 10px 10px;
+    font-size: 20px;
+}
+
+#leftContainer {
+    max-width: 500px;
+    width: 45vw;
+}
+
+#rightContainer {
+    max-width: 500px;
+    width: 50vw;
+    margin-left: auto;
+    background-color: papayawhip;
+    box-shadow: 2px 2px 10px;
+    text-align: center;
+
+}
+
+.rightSec {
+    /* max-width: 40vw; */
+    /* width: fit-content; */
+    padding: 5px 10px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color:steelblue;
+    color: white;
+}
+
+#imagesCaption{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.section {
+    box-shadow: 2px 2px 10px black;
+    max-width: 45vw;
+    width: fit-content;
+    background-color: orange;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+#nameDiv {
+    font-size: 26px;
+}
+
+#cuisineDiv {
+    font-size: 23px;
+}
+
+#return {
+    width: 200px;
+    font-size: 30px;
+    color: white;
+    background-color: rgb(120, 131, 196);
+    margin: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#return:hover {
+    background-color: orchid;
+}
+
+
+#slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    width: 100vw;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.384);
+}
+
+#sliderImage {
+    max-width: 40vw;
+    width: 100%;
+    height: auto;
+}
+
+#slider div {
+    cursor: pointer;
+}
+
+#slider div img {
+    width: 20px;
+    margin: 0px 20px;
+}
+
+
+#rating {
+    text-align: center;
+}
+
+.star {
+    width: 24px;
+    cursor: pointer;
+}
+
+.isFilled {
+    content: url("../../../../assets/images/icons8-christmas-star-24 (1).png")
+}
+
+
+#interactive {
+    display: flex;
+    justify-content:space-between;
+    padding: 4px;
+    align-items: baseline;
+}
+
+.isInvisible {
+    visibility:hidden;
+    opacity: 0;
+}
+
+
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+
+button:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#addButton {
+    background-color: green;
+}
+
+#removeButton {
+    background-color: red;
+}
+
+input, label {
+    width: 80%;
+    display: block;
+    margin: 5px 10px;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+input{
+    margin: auto;
+}
+
+#body {
+    width: 80%;
+    height: 200px;
+    resize: none;
+    
+}
+
+form button {
+    background-color: orange;
+}
+
+form button:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+}
+
+.alert {
+    color:red;
+}
+
+.review {
+    width: 80%;
+    height: fit-content;
+    padding: 5px 10px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 20px;
+    word-wrap: break-word;
+}
+
+@media (max-width: 700px) {
+    #wrapper {
+        flex-direction: column;
+        /* margin: 0; */
+    }
+
+    #return {
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    #leftContainer, #rightContainer {
+        margin: auto;
+        width: 80%;
+        max-width: unset;
+    }
+
+
+    .section {
+        text-align: center;
+        width: 80%;
+        max-width: unset;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        text-align: left;
+    }
+
+    #sliderImage {
+        max-width: 80vw;
+    }
+
+    #review {
+        width: 90%;
+    }
+
+
+}

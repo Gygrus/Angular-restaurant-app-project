@@ -1,0 +1,42 @@
+
+
+#shopList {
+    width: 80vw;
+    background-color: rgb(51, 57, 63);
+    border: 4px solid orange;
+    color: white;
+    /* width: 150px; */
+    margin: auto;
+    overflow:hidden;
+    height: auto;
+    text-align: center;
+    z-index: 5;
+}
+
+.shopListItem {
+    text-align: center;
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+.itemBlock {
+    border-top: 2px solid white;
+    padding: 5px 10px;
+}
+
+#shopListHeader {
+    padding: 5px 10px;
+}
+
+#sumOfItems {
+    padding: 5px 10px;
+    border-top: 2px solid white;
+}
+
+@media (max-width: 600px) {
+    #shopList {
+        width: 100%;
+        top: 300px;
+    }
+
+}

@@ -1,0 +1,44 @@
+<div id="filters" *ngIf="_router.url === '/menu'">
+    <form>
+        <div class="section">
+            <h2>Nazwa dania</h2>
+            <input #name id="name" name="dishName" [(ngModel)]="filterData.searchName" (keyup)="paginInfo.setDishes()">
+        </div>
+        <div class="section">
+            <h2>Typ kuchni</h2>
+            <button *ngFor="let cuisine of filterData.getAllCuisines()"
+            (click)="filterData.addCuisine(cuisine)"
+            (click)="paginInfo.setDishes()"
+            type="button">{{cuisine}}</button>
+        </div>
+        <div class="section">
+            <h2>Kategoria</h2>
+            <button *ngFor="let category of filterData.getAllCategories()"
+            (click)="filterData.addCategory(category)"
+            (click)="paginInfo.setDishes()"
+            type="button">{{category}}</button>
+        </div>
+        <div class="section">
+            <h2>Ocena</h2>
+            <button *ngFor="let rating of filterData.getAllRatings()"
+            (click)="filterData.addRating(rating)"
+            (click)="paginInfo.setDishes()"
+            type="button">{{rating}}</button>
+        </div>
+        <div class="section" id="prices">
+            <ng5-slider [(value)]="filterData.searchMinPrice" [(highValue)]="filterData.searchMaxPrice" 
+            [options]="options" (valueChange)="paginInfo.setDishes()" (highValueChange)="paginInfo.setDishes()"></ng5-slider>
+            
+        </div>  
+        <button (click)="filterData.resetAll()"
+        (click)="paginInfo.setDishes()">Resetuj filtry</button>
+        <p>Obecne filtry:</p>
+        <p class="filterResults" *ngIf="filterData.searchCuisine.length > 0">Kuchnia: 
+            <span class="itemFiltered" *ngFor="let item of filterData.searchCuisine">{{item}}</span></p>
+        <p class="filterResults" *ngIf="filterData.searchCategory.length > 0">Kategoria: 
+            <span class="itemFiltered" *ngFor="let item of filterData.searchCategory">{{item}}</span></p>
+        <p class="filterResults" *ngIf="filterData.searchRating.length > 0">Ocena: 
+            <span class="itemFiltered" *ngFor="let item of filterData.searchRating">{{item}}</span></p>
+    </form>
+
+</div>

@@ -1,0 +1,60 @@
+
+<form [formGroup]="itemDetails" (ngSubmit) = "onSubmit()" id="container">
+  <h2>Szczegóły dania</h2>
+
+  <label for="name">Nazwa: </label>
+  <input id="name" type="text" formControlName="name">
+  <p class="alert" *ngIf="itemDetails.get('name')!.hasError('duplicateName')">Nazwa już istnieje</p>
+  <p class="alert" *ngIf="itemDetails.get('name')!.hasError('required') && (itemDetails.get('name')!.touched || itemDetails.get('name')!.dirty)">Nazwa jest wymagana</p>
+  <p class="alert" *ngIf="itemDetails.get('name')!.hasError('pattern') && (itemDetails.get('name')!.touched || itemDetails.get('name')!.dirty)">Niedozwolone znaki</p>
+
+  <label for="cuisine">Kuchnia: </label>
+  <input id="cuisine" type="text" formControlName="cuisine">
+  <p class="alert" *ngIf="itemDetails.get('cuisine')!.hasError('required') && (itemDetails.get('cuisine')!.touched || itemDetails.get('cuisine')!.dirty)">Kuchnia jest wymagana</p>
+  <p class="alert" *ngIf="itemDetails.get('cuisine')!.hasError('pattern') && (itemDetails.get('cuisine')!.touched || itemDetails.get('cuisine')!.dirty)">Niedozwolone znaki</p>
+  
+  <label for="type">Typ dania: </label>
+  <input id="type" type="text" formControlName="type">
+  <p class="alert" *ngIf="itemDetails.get('type')!.hasError('required') && (itemDetails.get('type')!.touched || itemDetails.get('type')!.dirty)">Typ dania jest wymagany</p>
+  <p class="alert" *ngIf="itemDetails.get('type')!.hasError('pattern') && (itemDetails.get('type')!.touched || itemDetails.get('type')!.dirty)">Niedozwolone znaki</p>
+  
+  <label for="category">Kategoria: </label>
+  <input id="category" type="text" formControlName="category">
+  <p class="alert" *ngIf="itemDetails.get('category')!.hasError('required') && (itemDetails.get('category')!.touched || itemDetails.get('category')!.dirty)">Kategoria jest wymagana</p>
+  <p class="alert" *ngIf="itemDetails.get('category')!.hasError('pattern') && (itemDetails.get('category')!.touched || itemDetails.get('category')!.dirty)">Niedozwolone znaki</p>
+  
+  <label for="quantity">Ilość: </label>
+  <input id="quantity" type="number" formControlName="quantity">
+  <p class="alert" *ngIf="itemDetails.get('quantity')!.hasError('required') && (itemDetails.get('quantity')!.touched || itemDetails.get('quantity')!.dirty)">Ilość jest wymagana</p>
+  <p class="alert" *ngIf="itemDetails.get('quantity')!.hasError('min') && (itemDetails.get('quantity')!.touched || itemDetails.get('quantity')!.dirty)">Wymagana wartość nieujemna</p>
+
+  <label for="price">Cena: </label>
+  <input id="price" type="number" formControlName="price">
+  <p class="alert" *ngIf="itemDetails.get('price')!.hasError('required') && (itemDetails.get('price')!.touched || itemDetails.get('price')!.dirty)">Cena jest wymagana</p>
+  <p class="alert" *ngIf="itemDetails.get('price')!.hasError('min') && (itemDetails.get('price')!.touched || itemDetails.get('price')!.dirty)">Wymagana wartość nieujemna</p>
+
+  <label for="description">Opis: </label>
+  <input id="description" type="text" formControlName="description">
+  <p class="alert" *ngIf="itemDetails.get('description')!.hasError('required') && (itemDetails.get('description')!.touched || itemDetails.get('description')!.dirty)">Opis jest wymagany</p>
+
+  <div formArrayName="ingredients">
+      <h2>Składniki</h2>
+      <button (click) = "addIngredient()" type = "button">Dodaj kolejny składnik</button>
+      <div *ngFor = "let ingredient of ingredients.controls; let i = index">
+        <label for="ingredient-{{ i }}">Składnik:</label>
+        <input id="ingredient-{{ i }}" type="text" [formControlName]="i">
+      </div>
+  </div>
+
+  <div formArrayName="images">
+    <h2>Zdjęcia</h2>
+    <button (click) = "addImage()" type = "button">Dodaj kolejne zdjęcie</button>
+    <div *ngFor = "let image of images.controls; let i = index">
+      <label for="image-{{ i }}">Zdjęcie:</label>
+      <input id="image-{{ i }}" type="text" [formControlName]="i">
+    </div>
+  </div>
+<div id="buttonContainer">
+    <button type="submit" [disabled]="!itemDetails.valid" id = "submitButton">Dodaj potrawę</button>
+</div>
+</form>
