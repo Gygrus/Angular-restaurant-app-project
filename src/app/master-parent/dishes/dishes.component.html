@@ -1,0 +1,31 @@
+<app-filter-dishes></app-filter-dishes>
+<app-pagination-bar *ngIf="route.children.length === 0"></app-pagination-bar>
+<router-outlet></router-outlet>
+<div id="dishesContainer" *ngIf="route.children.length === 0">
+    <div *ngFor="let dish of Dishes.dishList | filterDishesPipe:filterData.searchName:filterData.searchCategory:
+    filterData.searchCuisine:filterData.searchRating:filterData.searchMinPrice:filterData.searchMaxPrice:
+    curAndShopList.currencies[curAndShopList.currentCurrency].value | 
+    slice:(paginInfo.currentPage-1)*paginInfo.itemsAtOneTime:paginInfo.currentPage*paginInfo.itemsAtOneTime" >
+        <app-dish
+        [name]="dish.name"
+        [cuisine]="dish.cuisine"
+        [type]="dish.type"
+        [category]="dish.category"
+        [ingredients]="dish.ingredients"
+        [quantity]="dish.quantity"
+        [sold]="dish.ordered"
+        [price]="dish.price"
+        [description]="dish.description"
+        [images]="dish.images"
+        [rating]="dish.rating"
+        [maxDishes]="Dishes.maxDishes"
+        [minDishes]="Dishes.minDishes"
+        [currency]="curAndShopList.currentCurrency"
+        (addOrderEvent)="addOrder($event)"
+        (removeOrderEvent)="removeOrder($event)"
+        (removeDishEvent)="removeDish($event)"
+        (addRatingEvent)="setRanking($event)"
+        ></app-dish>
+    </div> 
+</div>
+<app-pagination-bar *ngIf="route.children.length === 0"></app-pagination-bar>

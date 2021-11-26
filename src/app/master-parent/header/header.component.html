@@ -1,0 +1,27 @@
+<div id="header">
+    <div id="restName">Pod Kamieniem</div>
+</div>
+<div id="navbar">
+    <div id="mainView" routerLink="/home" routerLinkActive="active">Główna</div>
+    <div id="addItemButton" routerLink="/new-dish" routerLinkActive="active">Dodaj potrawę</div>
+    <div id="addFilterMenu" routerLink="/menu" routerLinkActive="active">Menu</div>
+    <div id="currency">
+        <p>Waluta &nbsp;</p>
+        <button id="euro"
+        [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'euro' ? 'grey':'white'}"
+        (click)="setCurrency('euro')">€</button>
+        <button id="usd"
+        [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'usd' ? 'grey':'white'}"
+        (click)="setCurrency('usd')">$</button>
+    </div>
+    <div id="details"
+    [ngStyle]="{'background-color': curAndShopList.numOfOrders > 10? 'blue':'orange'}">
+        <span>Zamówionych: {{curAndShopList.numOfOrders}}</span>
+        <div id="quantity"></div>
+    </div>
+    <div id="shopListButton" routerLink="/shop-list" routerLinkActive="active"
+    ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart" id="shoppingCart"></div>
+</div>
+<router-outlet></router-outlet>
+
+
