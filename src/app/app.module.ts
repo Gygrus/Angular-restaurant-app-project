@@ -4,6 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Ng5SliderModule } from 'ng5-slider';
 
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from '../environments/environment'; 
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { AppComponent } from './app.component';
 import { DishesComponent } from './master-parent/dishes/dishes.component';
@@ -21,6 +24,7 @@ import { HomeComponent } from './master-parent/home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DishDetailsComponent } from './master-parent/dishes/dish-details/dish-details.component';
 import { PaginationBarComponent } from './master-parent/dishes/pagination-bar/pagination-bar.component';
+import { DatabaseDataService } from './service-database/database-data.service';
 
 
 const appRoutes: Routes = [
@@ -52,15 +56,17 @@ const appRoutes: Routes = [
     PaginationBarComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig), 
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     Ng5SliderModule,
+    AngularFireDatabaseModule,
     RouterModule.forRoot(
       appRoutes
     )
   ],
-  providers: [ListOfDishesService, CurrencyAndShopListService],
+  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

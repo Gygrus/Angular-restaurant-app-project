@@ -25,9 +25,6 @@ export class PaginationService {
     this.FilterData.searchMaxPrice, this.CurrencyData.currencies[this.CurrencyData.currentCurrency].value)
     
     this.availableDishes = this.filteredDishes.length;
-    console.log(this.filteredDishes, "h");
-    console.log(this.Dishes.dishList)
-    console.log(this.FilterData.searchMaxPrice, this.FilterData.searchMinPrice);
     if (this.getMaxPage() < this.currentPage){
       this.currentPage = this.getMaxPage();
     } else if (this.currentPage <= 0 && this.getMaxPage() > 0){
@@ -40,7 +37,7 @@ export class PaginationService {
   }
 
   getMaxPage(){
-    return Math.ceil(this.availableDishes/6);
+    return Math.ceil(this.availableDishes/this.itemsAtOneTime);
   }
 
   pageNext(){

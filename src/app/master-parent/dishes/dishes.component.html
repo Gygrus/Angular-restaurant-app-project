@@ -2,8 +2,13 @@
 <app-pagination-bar *ngIf="route.children.length === 0"></app-pagination-bar>
 <router-outlet></router-outlet>
 <div id="dishesContainer" *ngIf="route.children.length === 0">
-    <div *ngFor="let dish of Dishes.dishList | filterDishesPipe:filterData.searchName:filterData.searchCategory:
-    filterData.searchCuisine:filterData.searchRating:filterData.searchMinPrice:filterData.searchMaxPrice:
+    <div *ngFor="let dish of Dishes.dishList | filterDishesPipe:
+    filterData.searchName:
+    filterData.searchCategory:
+    filterData.searchCuisine:
+    filterData.searchRating:
+    filterData.searchMinPrice:
+    filterData.searchMaxPrice:
     curAndShopList.currencies[curAndShopList.currentCurrency].value | 
     slice:(paginInfo.currentPage-1)*paginInfo.itemsAtOneTime:paginInfo.currentPage*paginInfo.itemsAtOneTime" >
         <app-dish

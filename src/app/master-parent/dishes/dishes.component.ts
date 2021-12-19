@@ -12,12 +12,12 @@ import { PaginationService } from 'src/app/service-pagination/pagination.service
 })
 export class DishesComponent implements OnInit {
 
+
   public constructor(public route: ActivatedRoute, public Dishes: ListOfDishesService, 
     public curAndShopList: CurrencyAndShopListService, public filterData: FilterDataService,
     public paginInfo: PaginationService) { }
-
-  ngOnInit(): void {
-  }
+  // myDishes: any[] = [];
+  ngOnInit(): void {}
 
   addOrder(dish: any){
     let a = this.Dishes.dishList.find(x => x.name === dish);
@@ -48,10 +48,12 @@ export class DishesComponent implements OnInit {
       this.filterData.checkIfValid(a!);
       this.paginInfo.setDishes();
     }
+    // console.log(this.myDishes, "hasdhaw");
   }
 
   setRanking(data: any[]){
     (this.Dishes.dishList.find(x => x.name === data[1]))!.rating = data[0];
+    // console.log(this.myDishes, "hasdhaw");
   }
 
 }
