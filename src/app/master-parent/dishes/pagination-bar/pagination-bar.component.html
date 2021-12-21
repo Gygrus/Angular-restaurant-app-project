@@ -5,3 +5,11 @@
     <div class = "section clickable" (click) = paginInfo.pageNext()>&#62;</div>
     <div class = "section clickable" (click) = paginInfo.pageLast()>&#8811;</div>
 </div>
+
+<div id="pagesNumberContainer">
+  <h3>Ilość dań na stronę: </h3>
+  <input #pagesNumber type="number" id="pagesNumber"
+         value="6" min="1" oninput="validity.valid||(value='');"
+         [(ngModel)]="paginInfo.itemsAtOneTime"
+         (ngModelChange)="paginInfo.setDishes()">
+</div>

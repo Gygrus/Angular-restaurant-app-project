@@ -9,20 +9,20 @@
     <div class="cardElement"  id="type">{{type}}</div>
     <div class="cardElement"  id="price">Cena: {{(price*currencies[currency].value).toFixed(2)}}{{currencies[currency].symbol}}</div>
     <div id="interactive">
-        <button id="removeButton" 
+        <button id="removeButton"
         [class.isInvisible]="sold <= 0"
         (click)="removeOrder()">-</button>
         <span class="quantity" *ngIf="quantity > 0"
         [ngStyle]="{'color': quantity > 3 ? 'green': 'red'}">Pozostało: {{quantity}}</span>
         <span class="quantity" *ngIf="quantity === 0"
         [ngStyle]="{'color': 'red'}">Brak dań!</span>
-        <button id="addButton" 
+        <button id="addButton"
         [class.isInvisible]="quantity <= 0"
         (click)="addOrder()">+</button>
     </div>
-    <button id="removeDish" (click)="removeDish()">X</button>
+<!--    <button id="removeDish" (click)="removeDish()">X</button>-->
     <div id="rating">
         <h4>Ocena: {{rating}}/5</h4>
-    </div>      
+    </div>
 
 </div>

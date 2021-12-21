@@ -5,6 +5,8 @@ import { Dish } from '../../../../Dish'
 
 import { PaginationService } from 'src/app/service-pagination/pagination.service';
 import { FilterDataService } from 'src/app/service-filter/filter-data.service';
+import {AngularFireDatabase} from "@angular/fire/compat/database";
+import {DatabaseDataService} from "../../../service-database/database-data.service";
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -38,7 +40,7 @@ duplicateNameValidator(control: FormControl){
       }
     }
   }
-  return null 
+  return null
 }
 
 get ingredients() {
@@ -61,10 +63,12 @@ onSubmit() {
   this.addItem(this.itemDetails.value);
   this.itemDetails.reset();
   this.filterData.resetAll();
+  this.paginInfo.setDishes();
 }
 
 addItem(item: any){
   const newItem: Dish = {
+    key: "",
     name: item.name,
     cuisine: item.cuisine,
     type: item.type,
@@ -78,14 +82,16 @@ addItem(item: any){
     rating: 0,
     reviews: []
   };
-  this.Dishes.dishList.push(newItem);
+  this.db.addDishToDB(newItem);
   this.Dishes.maxDishes = this.Dishes.mostExpensive();
   this.Dishes.minDishes = this.Dishes.leastExpensive();
-  this.paginInfo.setDishes();
 }
 
-constructor(private fb: FormBuilder, public Dishes: ListOfDishesService, 
-  public filterData: FilterDataService, public paginInfo: PaginationService) { }
+constructor(private fb: FormBuilder,
+            public Dishes: ListOfDishesService,
+            public filterData: FilterDataService,
+            public paginInfo: PaginationService,
+            public db: DatabaseDataService) { }
 
 ngOnInit(): void {
 }

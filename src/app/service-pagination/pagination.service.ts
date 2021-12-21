@@ -6,6 +6,7 @@ import { DishesComponent } from '../master-parent/dishes/dishes.component';
 import { ListOfDishesService } from '../serviceListOfDishes/list-of-dishes.service';
 import { FilterDataService } from '../service-filter/filter-data.service';
 import { CurrencyAndShopListService } from '../serviceCurrencyAndShopList/currency-and-shop-list.service';
+import {DatabaseDataService} from "../service-database/database-data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +14,29 @@ import { CurrencyAndShopListService } from '../serviceCurrencyAndShopList/curren
 export class PaginationService {
   currentPage: number = 1;
   itemsAtOneTime: number = 6;
-  constructor(public Dishes: ListOfDishesService, public CurrencyData: CurrencyAndShopListService, public FilterData: FilterDataService) { }
+  constructor(public Dishes: ListOfDishesService,
+              public CurrencyData: CurrencyAndShopListService,
+              public FilterData: FilterDataService,
+              public db: DatabaseDataService) { }
   pipe = new FilterDishesPipe;
 
   filteredDishes: Dish[] = this.Dishes.dishList;
   availableDishes = this.filteredDishes.length;
 
   setDishes(){
-    this.filteredDishes = this.pipe.transform(this.Dishes.dishList, this.FilterData.searchName, this.FilterData.searchCategory, 
-    this.FilterData.searchCuisine, this.FilterData.searchRating, this.FilterData.searchMinPrice, 
-    this.FilterData.searchMaxPrice, this.CurrencyData.currencies[this.CurrencyData.currentCurrency].value)
-    
-    this.availableDishes = this.filteredDishes.length;
-    if (this.getMaxPage() < this.currentPage){
-      this.currentPage = this.getMaxPage();
-    } else if (this.currentPage <= 0 && this.getMaxPage() > 0){
-      this.currentPage = 1;
-    }
-    }
+    this.db.dishesList.subscribe(e => {
+      this.filteredDishes = this.pipe.transform(e, this.FilterData.searchName, this.FilterData.searchCategory,
+        this.FilterData.searchCuisine, this.FilterData.searchRating, this.FilterData.searchMinPrice,
+        this.FilterData.searchMaxPrice, this.CurrencyData.currencies[this.CurrencyData.currentCurrency].value)
 
-  sliderChange(value: any){
-    console.log(value);
-  }
+      this.availableDishes = this.filteredDishes.length;
+      if (this.getMaxPage() < this.currentPage){
+        this.currentPage = this.getMaxPage();
+      } else if (this.currentPage <= 0 && this.getMaxPage() > 0){
+        this.currentPage = 1;
+      }
+    })
+    }
 
   getMaxPage(){
     return Math.ceil(this.availableDishes/this.itemsAtOneTime);
@@ -54,5 +56,11 @@ export class PaginationService {
 
   pageLast(){
     this.currentPage = this.getMaxPage();
+  }
+
+  setItemsNumber(value: number){
+    this.itemsAtOneTime = value;
+    this.currentPage = 1;
+    this.setDishes();
   }
 }

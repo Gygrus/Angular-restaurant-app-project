@@ -5,7 +5,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from "@angular/fire/compat";
-import { environment } from '../environments/environment'; 
+import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { AddItemComponent } from './master-parent/header/add-item/add-item.compo
 import { ListOfDishesService } from './serviceListOfDishes/list-of-dishes.service'
 import { CurrencyAndShopListService } from './serviceCurrencyAndShopList/currency-and-shop-list.service';
 import { ShopListComponent } from './master-parent/shop-list/shop-list.component';
-import { FilterDishesComponent } from './master-parent/dishes/filter-dishes/filter-dishes.component'; 
+import { FilterDishesComponent } from './master-parent/dishes/filter-dishes/filter-dishes.component';
 import { FormsModule } from '@angular/forms';
 import { FilterDishesPipe } from './filter-pipe/filter-dishes.pipe';
 import { HomeComponent } from './master-parent/home/home.component';
@@ -25,11 +25,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DishDetailsComponent } from './master-parent/dishes/dish-details/dish-details.component';
 import { PaginationBarComponent } from './master-parent/dishes/pagination-bar/pagination-bar.component';
 import { DatabaseDataService } from './service-database/database-data.service';
+import {PaginationService} from "./service-pagination/pagination.service";
+import {FilterDataService} from "./service-filter/filter-data.service";
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'menu', component: DishesComponent, 
+  { path: 'menu', component: DishesComponent,
           children: [
             {path: "dish-item/:name", component: DishDetailsComponent}
           ] },
@@ -56,7 +58,7 @@ const appRoutes: Routes = [
     PaginationBarComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig), 
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
@@ -66,7 +68,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService],
+  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

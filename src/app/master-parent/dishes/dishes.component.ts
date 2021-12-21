@@ -4,6 +4,8 @@ import { CurrencyAndShopListService } from '../../serviceCurrencyAndShopList/cur
 import { FilterDataService } from 'src/app/service-filter/filter-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { PaginationService } from 'src/app/service-pagination/pagination.service';
+import {DatabaseDataService} from "../../service-database/database-data.service";
+import {Dish} from "../../../Dish";
 
 @Component({
   selector: 'app-dishes',
@@ -13,10 +15,13 @@ import { PaginationService } from 'src/app/service-pagination/pagination.service
 export class DishesComponent implements OnInit {
 
 
-  public constructor(public route: ActivatedRoute, public Dishes: ListOfDishesService, 
-    public curAndShopList: CurrencyAndShopListService, public filterData: FilterDataService,
-    public paginInfo: PaginationService) { }
-  // myDishes: any[] = [];
+  public constructor(public route: ActivatedRoute,
+                     public Dishes: ListOfDishesService,
+                     public curAndShopList: CurrencyAndShopListService,
+                     public filterData: FilterDataService,
+                     public paginInfo: PaginationService,
+                     private db: DatabaseDataService) { }
+
   ngOnInit(): void {}
 
   addOrder(dish: any){
@@ -28,32 +33,23 @@ export class DishesComponent implements OnInit {
 
   removeOrder(dish: string){
     let a = this.Dishes.dishList.find(x => x.name === dish);
-    a!.quantity++; 
+    a!.quantity++;
     a!.ordered--;
     this.curAndShopList.removePosToShopList(dish);
   }
 
-  removeDish(dish: any){
-    let a = this.Dishes.dishList.find(x => x.name === dish);
-    const index = this.Dishes.dishList.indexOf(a||dish);
-    let b = [];
-    if (index > -1) {
-      this.Dishes.dishList.splice(index, 1);
-      let newList = Object.assign([], this.Dishes.dishList);
+  removeDish(dish: Dish){
+    this.db.removeDishFromDB(dish.key);
+    this.curAndShopList.searchAndDestroy(dish.name);
+    this.filterData.resetAll();
+  }
 
-      this.Dishes.dishList = newList;
-      this.Dishes.maxDishes = this.Dishes.mostExpensive();
-      this.Dishes.minDishes = this.Dishes.leastExpensive();
-      this.curAndShopList.searchAndDestroy(dish);
-      this.filterData.checkIfValid(a!);
-      this.paginInfo.setDishes();
-    }
-    // console.log(this.myDishes, "hasdhaw");
+  resetFilters(){
+    this.filterData.resetAll();
   }
 
   setRanking(data: any[]){
     (this.Dishes.dishList.find(x => x.name === data[1]))!.rating = data[0];
-    // console.log(this.myDishes, "hasdhaw");
   }
 
 }

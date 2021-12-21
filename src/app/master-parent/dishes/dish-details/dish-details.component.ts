@@ -3,6 +3,7 @@ import { ListOfDishesService } from '../../../serviceListOfDishes/list-of-dishes
 import { CurrencyAndShopListService } from '../../../serviceCurrencyAndShopList/currency-and-shop-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import {DatabaseDataService} from "../../../service-database/database-data.service";
 
 @Component({
   selector: 'app-dish-details',
@@ -22,13 +23,15 @@ export class DishDetailsComponent implements OnInit {
     body: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(500)]],
     date: ['']
   })
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, public Dishes: ListOfDishesService, public CurrencyDetails: CurrencyAndShopListService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, public Dishes: ListOfDishesService,
+              public CurrencyDetails: CurrencyAndShopListService, private db: DatabaseDataService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.db.dishesList.subscribe(() => {
+      this.route.paramMap.subscribe(params => {
       this.name = params.get('name');
       this.dishDetails = this.Dishes.dishList.filter(item => item.name==String(this.name))[0];
-    })
+    })})
   }
 
   onSubmit() {
@@ -59,7 +62,8 @@ export class DishDetailsComponent implements OnInit {
 
 
   addRating(star: any) {
-    this.dishDetails.rating = star+1;
+    this.db.changeRatingInDB(this.dishDetails.key, star+1);
+    // this.dishDetails.rating = star+1;
   }
 
   nextImage(e: { stopPropagation: () => void; }){

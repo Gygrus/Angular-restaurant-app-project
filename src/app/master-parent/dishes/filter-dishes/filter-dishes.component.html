@@ -26,18 +26,18 @@
             type="button">{{rating}}</button>
         </div>
         <div class="section" id="prices">
-            <ng5-slider [(value)]="filterData.searchMinPrice" [(highValue)]="filterData.searchMaxPrice" 
+            <ng5-slider [(value)]="filterData.searchMinPrice" [(highValue)]="filterData.searchMaxPrice"
             [options]="options" (valueChange)="paginInfo.setDishes()" (highValueChange)="paginInfo.setDishes()"></ng5-slider>
-            
-        </div>  
+
+        </div>
         <button (click)="filterData.resetAll()"
         (click)="paginInfo.setDishes()">Resetuj filtry</button>
         <p>Obecne filtry:</p>
-        <p class="filterResults" *ngIf="filterData.searchCuisine.length > 0">Kuchnia: 
+        <p class="filterResults" *ngIf="filterData.searchCuisine.length > 0">Kuchnia:
             <span class="itemFiltered" *ngFor="let item of filterData.searchCuisine">{{item}}</span></p>
-        <p class="filterResults" *ngIf="filterData.searchCategory.length > 0">Kategoria: 
+        <p class="filterResults" *ngIf="filterData.searchCategory.length > 0">Kategoria:
             <span class="itemFiltered" *ngFor="let item of filterData.searchCategory">{{item}}</span></p>
-        <p class="filterResults" *ngIf="filterData.searchRating.length > 0">Ocena: 
+        <p class="filterResults" *ngIf="filterData.searchRating.length > 0">Ocena:
             <span class="itemFiltered" *ngFor="let item of filterData.searchRating">{{item}}</span></p>
     </form>
 

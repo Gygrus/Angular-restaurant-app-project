@@ -1,5 +1,6 @@
 export class Dish {
     constructor(
+    public key: any,
     public name: string,
     public cuisine: string,
     public type: string,

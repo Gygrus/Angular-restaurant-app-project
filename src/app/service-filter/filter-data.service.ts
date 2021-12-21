@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ListOfDishesService } from '../serviceListOfDishes/list-of-dishes.service';
 import { Dish } from 'src/Dish';
 import { CurrencyAndShopListService } from '../serviceCurrencyAndShopList/currency-and-shop-list.service';
+import {DatabaseDataService} from "../service-database/database-data.service";
 
 
 @Injectable({
@@ -11,16 +12,21 @@ export class FilterDataService {
   searchName: string = '';
   searchCategory: string[] = [];
   searchCuisine: string[] = [];
-  MaxPrice: number = this.getMaxPrice();
-  MinPrice: number = this.getMinPrice();
-  searchMaxPrice: number = Number((this.getMaxPrice()*this.currencyData.currencies["euro"].value).toFixed(2));
-  searchMinPrice: number = Number((this.getMinPrice()*this.currencyData.currencies["euro"].value).toFixed(2));
+  MaxPrice: number = 0;
+  MinPrice: number = 0;
+  searchMaxPrice: number = 50;
+  searchMinPrice: number = 0;
   searchRating: number[] = [];
-  constructor( public Dishes: ListOfDishesService, public currencyData: CurrencyAndShopListService) { }
+  constructor( public Dishes: ListOfDishesService, public currencyData: CurrencyAndShopListService, public db: DatabaseDataService) {
+    this.db.dishesList.subscribe(e => {
+      this.MaxPrice = this.getMaxPrice();
+      this.MinPrice = this.getMinPrice();
+      this.searchMaxPrice = Number((this.MaxPrice*this.currencyData.currencies["euro"].value).toFixed(2));
+      this.searchMinPrice = Number((this.MinPrice*this.currencyData.currencies["euro"].value).toFixed(2));
+      this.resetAll();
+    })
+  }
 
-  // setSearchName(){
-  //   this.searchName = value;
-  // }
 
   getMaxPrice(){
     let result = 0;
@@ -29,7 +35,7 @@ export class FilterDataService {
     }
     return result;
   }
-  
+
   getMinPrice(){
     let result = Number.MAX_SAFE_INTEGER;
     for (let dish of this.Dishes.dishList){
@@ -40,7 +46,6 @@ export class FilterDataService {
 
   changeCuisine(cuisine: any[]){
     this.searchCuisine = cuisine;
-
   }
 
   changeCategory(category: any){
@@ -50,7 +55,7 @@ export class FilterDataService {
   changeRating(rating: any){
     this.searchRating = rating;
   }
-  
+
   getAllCategories() {
     let outputSet = new Set();
     for (let dish of this.Dishes.dishList){
@@ -124,6 +129,7 @@ export class FilterDataService {
       this.searchRating = [];
       this.searchMinPrice = Math.floor(Number((this.getMinPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
       this.searchMaxPrice = Math.ceil(Number((this.getMaxPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
+      console.log("Max = ", this.searchMaxPrice, " min = ", this.searchMinPrice);
       this.searchName = '';
     }
 

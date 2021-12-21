@@ -6,6 +6,7 @@
     box-shadow: 2px 2px 2px;
     border-radius: 10px;
     position: relative;
+    margin-bottom: 0;
 }
 
 .cardElement{
@@ -89,17 +90,17 @@ button:hover {
 
 
 
-#removeDish {
-    position: absolute;
-    top: 0;
-    left: -30px;
-    color: white;
-    background-color: red;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
+/*#removeDish {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: -30px;*/
+/*    color: white;*/
+/*    background-color: red;*/
+/*    border: none;*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    border-radius: 50%;*/
+/*}*/
 
 @media (max-width: 1200px){
     .dishContainer {
@@ -128,12 +129,12 @@ button:hover {
         font-size: 4vw;
     }
 
-    #removeDish {
-        left: -2.5vw;
-        width: 7vw;
-        height: 7vw;
-        font-size: 3vw;
-    }
+    /*#removeDish {*/
+    /*    left: -2.5vw;*/
+    /*    width: 7vw;*/
+    /*    height: 7vw;*/
+    /*    font-size: 3vw;*/
+    /*}*/
 
 }
 
@@ -154,10 +155,10 @@ button:hover {
         font-size: 5vw;
     }
 
-    #removeDish {
-        left: -4vw;
-        width: 13vw;
-        height: 13vw;
-        font-size: 4vw;
-    }
+    /*#removeDish {*/
+    /*    left: -4vw;*/
+    /*    width: 13vw;*/
+    /*    height: 13vw;*/
+    /*    font-size: 4vw;*/
+    /*}*/
 }

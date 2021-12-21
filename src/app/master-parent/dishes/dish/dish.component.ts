@@ -12,6 +12,7 @@ export class DishComponent implements OnInit {
   currentImage = 0;
   stars = [0, 1, 2, 3, 4];
   currencies = this.curAndShopList.currencies;
+  @Input() key!: string;
   @Input() sold!: number;
   @Input() currency!: string;
   @Input() name!: string;
@@ -51,8 +52,12 @@ export class DishComponent implements OnInit {
     }
   }
 
+  removeTestDish(key: string){
+    this.removeDishEvent.emit(key);
+  }
+
   removeDish() {
-    this.removeDishEvent.emit(this.name);
+    this.removeDishEvent.emit(this);
   }
 
 

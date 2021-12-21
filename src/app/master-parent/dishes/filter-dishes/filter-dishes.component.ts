@@ -6,6 +6,7 @@ import { PaginationBarComponent } from '../pagination-bar/pagination-bar.compone
 import { Options, LabelType } from 'ng5-slider';
 import { Router } from '@angular/router';
 import { PaginationService } from 'src/app/service-pagination/pagination.service';
+import {DatabaseDataService} from "../../../service-database/database-data.service";
 
 
 
@@ -22,14 +23,11 @@ interface SliderDetails {
   styleUrls: ['./filter-dishes.component.css']
 })
 export class FilterDishesComponent implements OnInit {
-  searchName?: string;
-  searchCategory: string[] = [];
-  searchCuisine: string[] = [];
-  searchRating: number[] = [];
-  constructor(public _router: Router, public Dishes: ListOfDishesService, public filterData: FilterDataService, 
-    public currencyData: CurrencyAndShopListService, public paginInfo: PaginationService) { }
-  value: number = Math.floor(Number((this.filterData.getMinPrice()*this.currencyData.currencies["euro"].value).toFixed(2)));
-  highValue: number = Math.floor(Number((this.filterData.getMaxPrice()*this.currencyData.currencies["euro"].value).toFixed(2)));
+  constructor(public _router: Router, public Dishes: ListOfDishesService, public filterData: FilterDataService,
+    public currencyData: CurrencyAndShopListService, public paginInfo: PaginationService, private db: DatabaseDataService) {}
+
+  value: number = 0;
+  highValue: number = this.filterData.searchMaxPrice;
   options: Options = {
     floor: 0,
     ceil: 50,
@@ -42,10 +40,9 @@ export class FilterDishesComponent implements OnInit {
         default:
           return this.currencyData.currencies[this.currencyData.currentCurrency].symbol + value;
       }
-    }
-  }
+    }}
 
-  
+
 
   createOpts(arg: string) {
     let opts: Options = {

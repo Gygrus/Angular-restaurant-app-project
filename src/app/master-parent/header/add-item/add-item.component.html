@@ -12,17 +12,17 @@
   <input id="cuisine" type="text" formControlName="cuisine">
   <p class="alert" *ngIf="itemDetails.get('cuisine')!.hasError('required') && (itemDetails.get('cuisine')!.touched || itemDetails.get('cuisine')!.dirty)">Kuchnia jest wymagana</p>
   <p class="alert" *ngIf="itemDetails.get('cuisine')!.hasError('pattern') && (itemDetails.get('cuisine')!.touched || itemDetails.get('cuisine')!.dirty)">Niedozwolone znaki</p>
-  
+
   <label for="type">Typ dania: </label>
   <input id="type" type="text" formControlName="type">
   <p class="alert" *ngIf="itemDetails.get('type')!.hasError('required') && (itemDetails.get('type')!.touched || itemDetails.get('type')!.dirty)">Typ dania jest wymagany</p>
   <p class="alert" *ngIf="itemDetails.get('type')!.hasError('pattern') && (itemDetails.get('type')!.touched || itemDetails.get('type')!.dirty)">Niedozwolone znaki</p>
-  
+
   <label for="category">Kategoria: </label>
   <input id="category" type="text" formControlName="category">
   <p class="alert" *ngIf="itemDetails.get('category')!.hasError('required') && (itemDetails.get('category')!.touched || itemDetails.get('category')!.dirty)">Kategoria jest wymagana</p>
   <p class="alert" *ngIf="itemDetails.get('category')!.hasError('pattern') && (itemDetails.get('category')!.touched || itemDetails.get('category')!.dirty)">Niedozwolone znaki</p>
-  
+
   <label for="quantity">Ilość: </label>
   <input id="quantity" type="number" formControlName="quantity">
   <p class="alert" *ngIf="itemDetails.get('quantity')!.hasError('required') && (itemDetails.get('quantity')!.touched || itemDetails.get('quantity')!.dirty)">Ilość jest wymagana</p>

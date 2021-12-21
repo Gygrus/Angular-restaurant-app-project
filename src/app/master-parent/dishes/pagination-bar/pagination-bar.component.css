@@ -2,11 +2,12 @@
     display: flex;
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
     justify-content: center;
     align-items: center;
     height: 30px;
     background-color: rgb(51, 57, 63);
+    margin-bottom: 4px;
 }
 
 .section {
@@ -22,4 +23,18 @@
     cursor: pointer;
     color: orange;
     transform: scale(1.2);
+}
+
+#pagesNumberContainer {
+  margin-top: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+#pagesNumberContainer input {
+  width: 50px;
 }

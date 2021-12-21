@@ -17,3 +17,27 @@
     border: 2px solid red;
     box-shadow: red;
 }
+
+
+#buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-top: 0;
+}
+
+#removeDishButton {
+  width: 50%;
+  padding: 5px;
+  margin-top: 4px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  background-color: darkred;
+  cursor: pointer;
+}
+
+
+#removeDishButton:hover {
+  background-color: red;
+}
