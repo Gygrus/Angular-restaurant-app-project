@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Ng5SliderModule } from 'ng5-slider';
 
-import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -27,19 +26,8 @@ import { PaginationBarComponent } from './master-parent/dishes/pagination-bar/pa
 import { DatabaseDataService } from './service-database/database-data.service';
 import {PaginationService} from "./service-pagination/pagination.service";
 import {FilterDataService} from "./service-filter/filter-data.service";
+import { AppRoutingModule } from './app-routing.module';
 
-
-const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'menu', component: DishesComponent,
-          children: [
-            {path: "dish-item/:name", component: DishDetailsComponent}
-          ] },
-  { path: 'new-dish', component: AddItemComponent },
-  { path: 'shop-list', component: ShopListComponent },
-  { path: '', redirectTo:'/home', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
-]
 
 @NgModule({
   declarations: [
@@ -64,9 +52,7 @@ const appRoutes: Routes = [
     FormsModule,
     Ng5SliderModule,
     AngularFireDatabaseModule,
-    RouterModule.forRoot(
-      appRoutes
-    )
+    AppRoutingModule
   ],
   providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService],
   bootstrap: [AppComponent]
