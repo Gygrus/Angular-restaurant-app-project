@@ -27,7 +27,7 @@ export class DatabaseDataService {
   }
 
   removeDishFromDB(key: string){
-    const dishList = this.db.list('dishesList')
+    const dishList = this.db.list('dishesList');
     dishList.remove(key);
   }
 

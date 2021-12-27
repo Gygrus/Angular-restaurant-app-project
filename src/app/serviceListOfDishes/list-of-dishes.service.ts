@@ -18,7 +18,6 @@ minDishes :any[] = []
       this.maxDishes = this.mostExpensive();
       this.minDishes = this.leastExpensive();
     })
-    // this.dishList = this.databaseDishes.testDishes;
   }
 
 

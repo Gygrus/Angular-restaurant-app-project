@@ -114,13 +114,13 @@ export class FilterDataService {
   checkIfValid(dish: Dish){
     if (this.searchCuisine.includes(dish.cuisine) && !this.getAllCuisines().includes(dish.cuisine)){
       this.addCuisine(dish.cuisine);
-    };
+    }
     if (this.searchCategory.includes(dish.category) && !this.getAllCategories().includes(dish.category)){
       this.addCategory(dish.category);
-    };
+    }
     if (this.searchRating.includes(dish.rating) && !this.getAllRatings().includes(dish.rating)){
       this.addRating(dish.rating);
-    };
+    }
 }
 
     resetAll(){
@@ -129,7 +129,6 @@ export class FilterDataService {
       this.searchRating = [];
       this.searchMinPrice = Math.floor(Number((this.getMinPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
       this.searchMaxPrice = Math.ceil(Number((this.getMaxPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
-      console.log("Max = ", this.searchMaxPrice, " min = ", this.searchMinPrice);
       this.searchName = '';
     }
 
