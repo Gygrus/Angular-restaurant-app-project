@@ -3,6 +3,9 @@ import { Dish } from '../../../Dish'
 import { ListOfDishesService } from '../../services/serviceListOfDishes/list-of-dishes.service';
 import { CurrencyAndShopListService } from '../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
 import { FilterDataService } from 'src/app/services/service-filter/filter-data.service';
+import {AuthService} from "../../services/serviceauth/auth.service";
+import firebase from "firebase/compat/app";
+import { User } from "../../services/user";
 
 @Component({
   selector: 'app-header',
@@ -12,8 +15,16 @@ import { FilterDataService } from 'src/app/services/service-filter/filter-data.s
 export class HeaderComponent implements OnInit {
   dishMenuStatus: number = 0;
   filterMenuStatus: number = 0;
+  user!: User;
 
-  public constructor(public Dishes: ListOfDishesService, public curAndShopList: CurrencyAndShopListService, public filterData: FilterDataService) { }
+  public constructor(public Dishes: ListOfDishesService,
+                     public curAndShopList: CurrencyAndShopListService,
+                     public filterData: FilterDataService,
+                     public authService: AuthService) {
+    this.authService.userData.subscribe((user) =>{
+      this.user = user;
+    });
+  }
 
 
   ngOnInit(): void {

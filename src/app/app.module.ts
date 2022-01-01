@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 import { AppComponent } from './app.component';
 import { DishesComponent } from './master-parent/dishes/dishes.component';
@@ -27,6 +28,8 @@ import { PaginationBarComponent } from './master-parent/dishes/pagination-bar/pa
 import { DatabaseDataService } from './services/service-database/database-data.service';
 import {PaginationService} from "./services/service-pagination/pagination.service";
 import {FilterDataService} from "./services/service-filter/filter-data.service";
+import { SignInComponent } from './master-parent/sign-in/sign-in.component';
+import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -44,6 +47,8 @@ import {FilterDataService} from "./services/service-filter/filter-data.service";
     PageNotFoundComponent,
     DishDetailsComponent,
     PaginationBarComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -52,7 +57,8 @@ import {FilterDataService} from "./services/service-filter/filter-data.service";
     FormsModule,
     Ng5SliderModule,
     AngularFireDatabaseModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireAuthModule
   ],
   providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService],
   bootstrap: [AppComponent]

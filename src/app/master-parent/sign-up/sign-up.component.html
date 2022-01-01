@@ -1,0 +1,27 @@
+<div class="displayTable">
+
+    <div class="authBlock">
+      <h3>Sign Up</h3>
+
+      <div class="formGroup">
+        <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
+      </div>
+
+      <div class="formGroup">
+        <input type="password" class="formControl" placeholder="Password" #userPwd required>
+      </div>
+
+      <div class="formGroup">
+        <input type="text" class="formControl" placeholder="NickName" #userName required>
+      </div>
+
+      <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value, userName.value)">
+      </div>
+
+    <div class="redirectToLogin">
+      <span> Masz już konto? <span class="redirect" routerLink="/sign-in">Zaloguj się</span></span>
+    </div>
+  </div>
+
+</div>

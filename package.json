@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.0.0",
+    "@angular/cli": "^13.1.2",
     "@angular/common": "~13.0.0",
     "@angular/compiler": "~13.0.0",
     "@angular/core": "~13.0.0",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.3",
-    "@angular/cli": "~13.0.3",
     "@angular/compiler-cli": "~13.0.0",
     "@types/googlemaps": "^3.39.13",
     "@types/jasmine": "~3.10.0",

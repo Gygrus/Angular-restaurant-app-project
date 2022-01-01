@@ -1,5 +1,13 @@
+export interface Roles {
+  client?: boolean;
+  manager?: boolean;
+  admin?: boolean;
+}
+
+
 export interface User {
   uid: string;
   email: string;
-  role: string;
+  displayName: string;
+  roles: Roles;
 }

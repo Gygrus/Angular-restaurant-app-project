@@ -44,12 +44,7 @@
     border: 4px solid orange;
 }
 
-#mainView {
-    border-right: 1px solid rgba(255, 255, 255, 0.281);
-}
-
 #currency {
-    border-right: 1px solid rgba(255, 255, 255, 0.281);
     color: green;
 }
 
@@ -59,16 +54,6 @@
     border-left: 1px solid rgba(255, 255, 255, 0.281);
 }
 
-#addItemButton {
-    border-right: 1px solid rgba(255, 255, 255, 0.281);
-}
-
-#addFilterMenu {
-    border-right: 1px solid rgba(255, 255, 255, 0.281);
-}
-
-
-
 #shoppingCart {
     width: 20px;
 }
@@ -77,13 +62,21 @@
     border-left: 1px solid rgba(255, 255, 255, 0.281);
 }
 
-#shopListButton:hover, #addItemButton:hover,  #addFilterMenu:hover, #mainView:hover{
-    background-color: rgb(70, 25, 116);
-    cursor: pointer;
+.borderclass {
+  border-right: 1px solid rgba(255, 255, 255, 0.281);
+}
+
+.hoverclass:hover {
+  background-color: rgb(70, 25, 116);
+  cursor: pointer;
 }
 
 
-
+@media (max-width: 886px){
+  *  *:not(#restName){
+    font-size: 14px !important;
+  }
+}
 
 @media (max-width: 600px){
 

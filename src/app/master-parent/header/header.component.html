@@ -2,10 +2,10 @@
     <div id="restName">Pod Kamieniem</div>
 </div>
 <div id="navbar">
-    <div id="mainView" routerLink="/home" routerLinkActive="active">Główna</div>
-    <div id="addItemButton" routerLink="/new-dish" routerLinkActive="active">Dodaj potrawę</div>
-    <div id="addFilterMenu" routerLink="/menu" routerLinkActive="active">Menu</div>
-    <div id="currency">
+    <div id="mainView" class="borderclass hoverclass" routerLink="/home" routerLinkActive="active">Główna</div>
+    <div id="addItemButton" class="borderclass hoverclass" routerLink="/new-dish" routerLinkActive="active">Dodaj potrawę</div>
+    <div id="addFilterMenu" class="borderclass hoverclass" routerLink="/menu" routerLinkActive="active">Menu</div>
+    <div id="currency" class="borderclass">
         <p>Waluta &nbsp;</p>
         <button id="euro"
         [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'euro' ? 'grey':'white'}"
@@ -14,12 +14,20 @@
         [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'usd' ? 'grey':'white'}"
         (click)="setCurrency('usd')">$</button>
     </div>
+  <div  *ngIf="!user"
+    routerLink="/sign-in" class="borderclass hoverclass" routerLinkActive="active">Zaloguj się</div>
+  <div  *ngIf="!user"
+    routerLink="/register-user" class="borderclass hoverclass" routerLinkActive="active">Zarejestruj się</div>
+  <div *ngIf="user" class="borderclass">{{authService.userName}}</div>
+  <div *ngIf="user"
+    class="borderclass hoverclass" routerLinkActive="active" (click)="authService.SignOut()"
+  >Wyloguj się</div>
     <div id="details"
     [ngStyle]="{'background-color': curAndShopList.numOfOrders > 10? 'blue':'orange'}">
         <span>Zamówionych: {{curAndShopList.numOfOrders}}</span>
         <div id="quantity"></div>
     </div>
-    <div id="shopListButton" routerLink="/shop-list" routerLinkActive="active"
+    <div id="shopListButton" routerLink="/shop-list" class="hoverclass" routerLinkActive="active"
     ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart" id="shoppingCart"></div>
 </div>
 <router-outlet></router-outlet>
