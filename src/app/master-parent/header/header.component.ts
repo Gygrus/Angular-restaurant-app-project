@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Dish } from '../../../Dish'
-import { ListOfDishesService } from '../../serviceListOfDishes/list-of-dishes.service';
-import { CurrencyAndShopListService } from '../../serviceCurrencyAndShopList/currency-and-shop-list.service';
-import { FilterDataService } from 'src/app/service-filter/filter-data.service';
+import { ListOfDishesService } from '../../services/serviceListOfDishes/list-of-dishes.service';
+import { CurrencyAndShopListService } from '../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
+import { FilterDataService } from 'src/app/services/service-filter/filter-data.service';
 
 @Component({
   selector: 'app-header',
@@ -34,6 +34,6 @@ export class HeaderComponent implements OnInit {
   //   this.filterMenuStatus += 1;
   //   this.filterMenuStatus %= 2;
   // }
-  
+
 
 }

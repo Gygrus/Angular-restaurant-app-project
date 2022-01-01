@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { pipe } from 'rxjs';
-import { Dish } from '../../Dish'
-import { FilterDishesPipe } from '../filter-pipe/filter-dishes.pipe';
-import { DishesComponent } from '../master-parent/dishes/dishes.component';
+import { Dish } from '../../../Dish'
+import { FilterDishesPipe } from '../../filter-pipe/filter-dishes.pipe';
+import { DishesComponent } from '../../master-parent/dishes/dishes.component';
 import { ListOfDishesService } from '../serviceListOfDishes/list-of-dishes.service';
 import { FilterDataService } from '../service-filter/filter-data.service';
 import { CurrencyAndShopListService } from '../serviceCurrencyAndShopList/currency-and-shop-list.service';

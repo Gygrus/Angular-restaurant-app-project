@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ListOfDishesService } from '../../serviceListOfDishes/list-of-dishes.service';
-import { CurrencyAndShopListService } from '../../serviceCurrencyAndShopList/currency-and-shop-list.service';
-import { FilterDataService } from 'src/app/service-filter/filter-data.service';
+import { ListOfDishesService } from '../../services/serviceListOfDishes/list-of-dishes.service';
+import { CurrencyAndShopListService } from '../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
+import { FilterDataService } from 'src/app/services/service-filter/filter-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { PaginationService } from 'src/app/service-pagination/pagination.service';
-import {DatabaseDataService} from "../../service-database/database-data.service";
+import { PaginationService } from 'src/app/services/service-pagination/pagination.service';
+import {DatabaseDataService} from "../../services/service-database/database-data.service";
 import {Dish} from "../../../Dish";
 
 @Component({

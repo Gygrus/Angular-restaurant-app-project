@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CurrencyAndShopListService } from '../../../serviceCurrencyAndShopList/currency-and-shop-list.service';
+import { CurrencyAndShopListService } from '../../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
 
 @Component({
   selector: 'app-dish',

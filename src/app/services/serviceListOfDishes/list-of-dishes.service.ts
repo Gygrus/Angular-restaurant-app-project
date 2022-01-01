@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Dish } from '../../Dish'
+import { Dish } from '../../../Dish'
 import { map, Observable } from 'rxjs';
 import { DatabaseDataService } from '../service-database/database-data.service';
 import { AngularFireList } from '@angular/fire/compat/database';

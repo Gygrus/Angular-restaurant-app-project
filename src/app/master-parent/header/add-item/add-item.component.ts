@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ListOfDishesService } from '../../../serviceListOfDishes/list-of-dishes.service';
+import { ListOfDishesService } from '../../../services/serviceListOfDishes/list-of-dishes.service';
 import { Dish } from '../../../../Dish'
 
-import { PaginationService } from 'src/app/service-pagination/pagination.service';
-import { FilterDataService } from 'src/app/service-filter/filter-data.service';
+import { PaginationService } from 'src/app/services/service-pagination/pagination.service';
+import { FilterDataService } from 'src/app/services/service-filter/filter-data.service';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {DatabaseDataService} from "../../../service-database/database-data.service";
+import {DatabaseDataService} from "../../../services/service-database/database-data.service";
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',

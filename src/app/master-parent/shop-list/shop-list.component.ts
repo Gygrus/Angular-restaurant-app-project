@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListOfDishesService } from '../../serviceListOfDishes/list-of-dishes.service';
-import { CurrencyAndShopListService } from '../../serviceCurrencyAndShopList/currency-and-shop-list.service';
+import { ListOfDishesService } from '../../services/serviceListOfDishes/list-of-dishes.service';
+import { CurrencyAndShopListService } from '../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
 
 @Component({
   selector: 'app-shop-list',

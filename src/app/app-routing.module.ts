@@ -5,7 +5,7 @@ import {DishesComponent} from "./master-parent/dishes/dishes.component";
 import {DishDetailsComponent} from "./master-parent/dishes/dish-details/dish-details.component";
 import {AddItemComponent} from "./master-parent/header/add-item/add-item.component";
 import {ShopListComponent} from "./master-parent/shop-list/shop-list.component";
-import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {PageNotFoundComponent} from "./master-parent/page-not-found/page-not-found.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },

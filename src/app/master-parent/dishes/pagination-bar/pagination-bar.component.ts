@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginationService } from 'src/app/service-pagination/pagination.service';
+import { PaginationService } from 'src/app/services/service-pagination/pagination.service';
 
 @Component({
   selector: 'app-pagination-bar',
