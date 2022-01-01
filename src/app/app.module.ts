@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Ng5SliderModule } from 'ng5-slider';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
@@ -26,7 +27,6 @@ import { PaginationBarComponent } from './master-parent/dishes/pagination-bar/pa
 import { DatabaseDataService } from './service-database/database-data.service';
 import {PaginationService} from "./service-pagination/pagination.service";
 import {FilterDataService} from "./service-filter/filter-data.service";
-import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
