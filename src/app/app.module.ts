@@ -30,6 +30,8 @@ import {PaginationService} from "./services/service-pagination/pagination.servic
 import {FilterDataService} from "./services/service-filter/filter-data.service";
 import { SignInComponent } from './master-parent/sign-in/sign-in.component';
 import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
+import { AdminViewComponent } from './master-parent/header/admin-view/admin-view.component';
+import {AuthService} from "./services/serviceauth/auth.service";
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
     PaginationBarComponent,
     SignInComponent,
     SignUpComponent,
+    AdminViewComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -60,7 +63,7 @@ import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
     AppRoutingModule,
     AngularFireAuthModule
   ],
-  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService],
+  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

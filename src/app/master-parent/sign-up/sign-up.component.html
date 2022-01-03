@@ -16,7 +16,14 @@
       </div>
 
       <div class="formGroup">
-        <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value, userName.value)">
+        <input type="checkbox" id="managerRole" class="form-check-input" [(ngModel)]="isCheckedManager" placeholder="Menager" #userRoleMenager>
+        <label for="managerRole" class="form-check-label">Manager</label>
+        <input type="checkbox" id="adminRole" class="form-check-input" [(ngModel)]="isCheckedAdmin" placeholder="Admin" #userRoleAdmin>
+        <label for="adminRole" class="form-check-label">Admin</label>
+      </div>
+
+      <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Sign Up" (click)="submitData(userEmail.value, userPwd.value, userName.value)">
       </div>
 
     <div class="redirectToLogin">

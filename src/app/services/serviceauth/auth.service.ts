@@ -8,69 +8,28 @@ import '@firebase/auth';
 import firebase from "firebase/compat/app";
 import {Observable, switchMap} from "rxjs";
 import { of } from 'rxjs';
+import {DatabaseDataService} from "../service-database/database-data.service";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  currentUser: Observable<firebase.User | null | undefined>;
+  userDetails: firebase.User | null | undefined = null;
 
-  userData: Observable<User>; // Save logged in user data
-  userName?: String;
-
-  constructor(private afAuth: AngularFireAuth,
+  constructor(public afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router,
-              private ngZone: NgZone) {
-    // //// Get auth data, then get firestore user document || null
-    // // @ts-ignore
-    // this.user$ = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //     if (user) {
-    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-    //     } else {
-    //       return of(null);
-    //     }
-    //   }
-    //   ));
-    // this.afAuth.authState.subscribe(user => {
-    //   if (user) {
-    //     this.userData = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     // @ts-ignore
-    //     JSON.parse(localStorage.getItem('user'));
-    //   } else {
-    //     // @ts-ignore
-    //     localStorage.setItem('user', null);
-    //     // @ts-ignore
-    //     JSON.parse(localStorage.getItem('user'));
-    //   }
-    // });
-    // @ts-ignore
-    this.userData = this.afAuth.authState.pipe(switchMap(user => {
-      if (user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-      } else {
-        return of(null)
-      }
-    }))
+              private ngZone: NgZone,
+              private db: DatabaseDataService) {
+    this.currentUser = this.afAuth.authState;
+    this.currentUser.subscribe( user => {
+      this.userDetails = user;
+    })
   }
 
-  // private updateUserData(user: { uid: any; email: any; name: any; }) {
-  //     // Sets user data to firestore on login
-  //     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-  //     const data: User = {
-  //       uid: user.uid,
-  //       email: user.email,
-  //       name: user.name,
-  //       role: {
-  //         client: true
-  //       }
-  //     }
-  //     return userRef.set(data, { merge: true })
-  //   }
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     })}
 
@@ -81,13 +40,12 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-        this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message)
       })
   }
 
-  SignUp(email: any, password: any, name: any) {
+  SignUp(email: any, password: any, name: any, roles: string[]) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.router.navigate(['home']);
@@ -95,16 +53,13 @@ export class AuthService {
         result.user.updateProfile(
           {displayName: name}
         )
-        this.SetUserData(result.user);
-        this.userName = name;
+        this.SetUserData(result.user, roles);
       }).catch((error) => {
         window.alert(error.message)
       })
   }
 
-  SetUserData(user: firebase.User | null) {
-    // @ts-ignore
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+  SetUserData(user: firebase.User | null, roles: string[]) {
     const userData: User = {
       // @ts-ignore
       uid: user.uid,
@@ -112,14 +67,11 @@ export class AuthService {
       email: user.email,
       // @ts-ignore
       displayName: user.displayName,
-      roles: {
-        client: true
-      }
+      dishesOrdered: [],
+      orderHist: [],
+      roles: roles
     }
-    this.userName = userData.displayName;
-    return userRef.set(userData, {
-      merge: true
-    })
+    this.db.addUserToDB(userData);
   }
 
 }

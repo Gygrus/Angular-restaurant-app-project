@@ -5,23 +5,23 @@
     <div id="mainView" class="borderclass hoverclass" routerLink="/home" routerLinkActive="active">Główna</div>
     <div id="addItemButton" class="borderclass hoverclass" routerLink="/new-dish" routerLinkActive="active">Dodaj potrawę</div>
     <div id="addFilterMenu" class="borderclass hoverclass" routerLink="/menu" routerLinkActive="active">Menu</div>
-    <div id="currency" class="borderclass">
-        <p>Waluta &nbsp;</p>
-        <button id="euro"
-        [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'euro' ? 'grey':'white'}"
-        (click)="setCurrency('euro')">€</button>
-        <button id="usd"
-        [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'usd' ? 'grey':'white'}"
-        (click)="setCurrency('usd')">$</button>
-    </div>
-  <div  *ngIf="!user"
+  <div  *ngIf="!authService.userDetails"
     routerLink="/sign-in" class="borderclass hoverclass" routerLinkActive="active">Zaloguj się</div>
-  <div  *ngIf="!user"
+  <div  *ngIf="!authService.userDetails"
     routerLink="/register-user" class="borderclass hoverclass" routerLinkActive="active">Zarejestruj się</div>
-  <div *ngIf="user" class="borderclass">{{authService.userName}}</div>
-  <div *ngIf="user"
+  <div *ngIf="authService.userDetails" class="borderclass">{{authService.userDetails.displayName}}</div>
+  <div *ngIf="authService.userDetails"
     class="borderclass hoverclass" routerLinkActive="active" (click)="authService.SignOut()"
   >Wyloguj się</div>
+    <div id="currency" class="borderclass">
+      <p>Waluta &nbsp;</p>
+      <button id="euro"
+              [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'euro' ? 'grey':'white'}"
+              (click)="setCurrency('euro')">€</button>
+      <button id="usd"
+              [ngStyle]="{'background-color': curAndShopList.currentCurrency === 'usd' ? 'grey':'white'}"
+              (click)="setCurrency('usd')">$</button>
+    </div>
     <div id="details"
     [ngStyle]="{'background-color': curAndShopList.numOfOrders > 10? 'blue':'orange'}">
         <span>Zamówionych: {{curAndShopList.numOfOrders}}</span>
@@ -29,6 +29,10 @@
     </div>
     <div id="shopListButton" routerLink="/shop-list" class="hoverclass" routerLinkActive="active"
     ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart" id="shoppingCart"></div>
+</div>
+<div id="hiddenTools">
+  <div id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina</div>
+  <div id="managerView" class="borderclass hoverclass" routerLink="" routerLinkActive="active">Manager dań</div>
 </div>
 <router-outlet></router-outlet>
 

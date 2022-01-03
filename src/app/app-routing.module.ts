@@ -8,6 +8,7 @@ import {ShopListComponent} from "./master-parent/shop-list/shop-list.component";
 import {PageNotFoundComponent} from "./master-parent/page-not-found/page-not-found.component";
 import { SignUpComponent} from "./master-parent/sign-up/sign-up.component";
 import { SignInComponent} from "./master-parent/sign-in/sign-in.component";
+import { AdminViewComponent } from "./master-parent/header/admin-view/admin-view.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'shop-list', component: ShopListComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
+  { path: 'admin-view', component: AdminViewComponent },
   { path: '', redirectTo:'/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
