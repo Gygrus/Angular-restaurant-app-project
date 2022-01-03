@@ -1,10 +1,10 @@
 
-<div id="shopList"
->
+<div id="shopList">
 <h2 id="shopListHeader">Koszyk</h2>
-<div class="shopListItem" 
+<div class="shopListItem"
 *ngFor="let item of curAndShopList.shopList">
     <div class="itemBlock"><span>{{item.name}} x{{item.quantity}}</span></div>
 </div>
 <h2 id="sumOfItems">Całość: {{curAndShopList.sumAll()+curAndShopList.currencies[curAndShopList.currentCurrency].symbol}}</h2>
+<button (click)="curAndShopList.updateUserDishesData()">ZAMÓW</button>
 </div>

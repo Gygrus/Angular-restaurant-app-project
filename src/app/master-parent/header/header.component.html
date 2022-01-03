@@ -3,7 +3,8 @@
 </div>
 <div id="navbar">
     <div id="mainView" class="borderclass hoverclass" routerLink="/home" routerLinkActive="active">Główna</div>
-    <div id="addItemButton" class="borderclass hoverclass" routerLink="/new-dish" routerLinkActive="active">Dodaj potrawę</div>
+    <div id="addItemButton" class="borderclass hoverclass" routerLink="/new-dish" routerLinkActive="active">
+      Dodaj potrawę</div>
     <div id="addFilterMenu" class="borderclass hoverclass" routerLink="/menu" routerLinkActive="active">Menu</div>
   <div  *ngIf="!authService.userDetails"
     routerLink="/sign-in" class="borderclass hoverclass" routerLinkActive="active">Zaloguj się</div>
@@ -28,11 +29,16 @@
         <div id="quantity"></div>
     </div>
     <div id="shopListButton" routerLink="/shop-list" class="hoverclass" routerLinkActive="active"
-    ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart" id="shoppingCart"></div>
+    ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart"
+          id="shoppingCart"></div>
 </div>
-<div id="hiddenTools">
-  <div id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina</div>
-  <div id="managerView" class="borderclass hoverclass" routerLink="" routerLinkActive="active">Manager dań</div>
+<div id="hiddenTools" *ngIf="
+this.authService.userDetails">
+  <div id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina
+  </div>
+  <div id="managerView" class="borderclass hoverclass" routerLink="" routerLinkActive="active"
+  *ngIf="this.authService.userDetails &&
+  this.authService.checkIfHasRole(this.authService.userDetails, ['Admin', 'Manager'])">Manager dań</div>
 </div>
 <router-outlet></router-outlet>
 

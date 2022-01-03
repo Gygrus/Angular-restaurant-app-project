@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CurrencyAndShopListService } from '../../../services/serviceCurrencyAndShopList/currency-and-shop-list.service';
+import {AuthService} from "../../../services/serviceauth/auth.service";
 
 @Component({
   selector: 'app-dish',
@@ -31,7 +32,8 @@ export class DishComponent implements OnInit {
   @Output() removeOrderEvent = new EventEmitter<any>();
   @Output() removeDishEvent = new EventEmitter<any>();
   @Output() addRatingEvent = new EventEmitter<[number, string]>();
-  constructor(public curAndShopList: CurrencyAndShopListService) { }
+  constructor(public curAndShopList: CurrencyAndShopListService,
+              public authService: AuthService) { }
   // public path$: BehaviorSubject<string> = new BehaviorSubject (this.images[0]);
 
   ngOnInit(): void {
@@ -50,10 +52,6 @@ export class DishComponent implements OnInit {
       this.sold --;
       this.removeOrderEvent.emit(this.name);
     }
-  }
-
-  removeTestDish(key: string){
-    this.removeDishEvent.emit(key);
   }
 
   removeDish() {

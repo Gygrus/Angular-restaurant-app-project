@@ -6,6 +6,7 @@ import { FilterDataService } from 'src/app/services/service-filter/filter-data.s
 import {AuthService} from "../../services/serviceauth/auth.service";
 import firebase from "firebase/compat/app";
 import auth = firebase.auth;
+import {DatabaseDataService} from "../../services/service-database/database-data.service";
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   public constructor(public Dishes: ListOfDishesService,
                      public curAndShopList: CurrencyAndShopListService,
                      public filterData: FilterDataService,
-                     public authService: AuthService) {
+                     public authService: AuthService,
+                     public db: DatabaseDataService) {
   }
 
 
@@ -27,9 +29,11 @@ export class HeaderComponent implements OnInit {
   }
 
   setCurrency(curr: any){
+    console.log(this.authService.userList, this.authService.userDetails, this.authService.currentUser);
     this.curAndShopList.changeCurrency(curr);
     this.filterData.searchMaxPrice = Math.ceil(Number((this.filterData.getMaxPrice()*this.curAndShopList.currencies[curr].value).toFixed(2)));
     this.filterData.searchMinPrice = Math.floor(Number((this.filterData.getMinPrice()*this.curAndShopList.currencies[curr].value).toFixed(2)));
   }
+
 
 }

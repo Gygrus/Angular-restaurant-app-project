@@ -15,6 +15,7 @@ import {DatabaseDataService} from "../service-database/database-data.service";
 export class AuthService {
   currentUser: Observable<firebase.User | null | undefined>;
   userDetails: firebase.User | null | undefined = null;
+  userList: any[] | undefined;
 
   constructor(public afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -24,6 +25,9 @@ export class AuthService {
     this.currentUser = this.afAuth.authState;
     this.currentUser.subscribe( user => {
       this.userDetails = user;
+    })
+    this.db.usersList.subscribe(e => {
+      this.userList = e;
     })
   }
 
@@ -53,25 +57,44 @@ export class AuthService {
         result.user.updateProfile(
           {displayName: name}
         )
-        this.SetUserData(result.user, roles);
+        this.SetUserData(result.user, roles, name);
       }).catch((error) => {
         window.alert(error.message)
       })
   }
 
-  SetUserData(user: firebase.User | null, roles: string[]) {
+  SetUserData(user: firebase.User | null, roles: string[], name: any) {
     const userData: User = {
       // @ts-ignore
       uid: user.uid,
       // @ts-ignore
       email: user.email,
       // @ts-ignore
-      displayName: user.displayName,
+      displayName: name,
       dishesOrdered: [],
       orderHist: [],
       roles: roles
     }
     this.db.addUserToDB(userData);
+  }
+
+  getUserRoles(uid: any){
+    // @ts-ignore
+    return this.userList.find(item => item.uid === uid).roles;
+  }
+
+  checkIfHasRole(user: any, roles: any[]){
+    if (user === null || user === undefined){
+      return false;
+    }
+    const curRoles = this.getUserRoles(user.uid);
+    for (let role of roles){
+      // @ts-ignore
+      if (curRoles.includes(role)){
+        return true;
+      }
+    }
+    return false;
   }
 
 }

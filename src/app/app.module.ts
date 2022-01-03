@@ -32,6 +32,7 @@ import { SignInComponent } from './master-parent/sign-in/sign-in.component';
 import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
 import { AdminViewComponent } from './master-parent/header/admin-view/admin-view.component';
 import {AuthService} from "./services/serviceauth/auth.service";
+import {AuthGuard} from "./guard/auth.guard";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {AuthService} from "./services/serviceauth/auth.service";
     AppRoutingModule,
     AngularFireAuthModule
   ],
-  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService, AuthService],
+  providers: [ListOfDishesService, CurrencyAndShopListService, DatabaseDataService, PaginationService, FilterDataService,
+    AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

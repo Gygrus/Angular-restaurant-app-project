@@ -9,12 +9,13 @@ import {PageNotFoundComponent} from "./master-parent/page-not-found/page-not-fou
 import { SignUpComponent} from "./master-parent/sign-up/sign-up.component";
 import { SignInComponent} from "./master-parent/sign-in/sign-in.component";
 import { AdminViewComponent } from "./master-parent/header/admin-view/admin-view.component";
+import {AuthGuard} from "./guard/auth.guard";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'menu', component: DishesComponent,
     children: [
-      {path: "dish-item/:name", component: DishDetailsComponent}
+      {path: "dish-item/:name", component: DishDetailsComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard]}
     ] },
   { path: 'new-dish', component: AddItemComponent },
   { path: 'shop-list', component: ShopListComponent },
