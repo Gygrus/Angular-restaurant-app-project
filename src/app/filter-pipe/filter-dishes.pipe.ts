@@ -1,3 +1,4 @@
+
 import { Pipe, PipeTransform } from '@angular/core';
 import { Dish } from '../../Dish'
 
@@ -12,8 +13,8 @@ export class FilterDishesPipe implements PipeTransform {
       searchName = searchName.toLowerCase();
       output = output.filter(dish=> {
         return dish.name.toLowerCase().includes(searchName);
-    })
-  }
+      })
+    }
     if (output && searchType.length > 0){
       let current = [];
       for (let type of searchType){
@@ -38,7 +39,7 @@ export class FilterDishesPipe implements PipeTransform {
       let current = [];
       for (let rating of searchRating){
         current.push(...output.filter(dish => {
-          return dish.rating === rating;
+          return dish.rating >= rating;
         }))
       }
       output = current;

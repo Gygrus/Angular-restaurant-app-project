@@ -33,6 +33,8 @@ import { SignUpComponent } from './master-parent/sign-up/sign-up.component';
 import { AdminViewComponent } from './master-parent/header/admin-view/admin-view.component';
 import {AuthService} from "./services/serviceauth/auth.service";
 import {AuthGuard} from "./guard/auth.guard";
+import { OrderHistComponent } from './master-parent/order-hist/order-hist.component';
+import { DishesManagerComponent } from './master-parent/header/dishes-manager/dishes-manager.component';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import {AuthGuard} from "./guard/auth.guard";
     SignInComponent,
     SignUpComponent,
     AdminViewComponent,
+    OrderHistComponent,
+    DishesManagerComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

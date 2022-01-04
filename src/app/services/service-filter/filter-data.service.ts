@@ -31,7 +31,7 @@ export class FilterDataService {
   getMaxPrice(){
     let result = 0;
     for (let dish of this.Dishes.dishList){
-        result = Math.max(result, dish.price);
+      result = Math.max(result, dish.price);
     }
     return result;
   }
@@ -39,7 +39,7 @@ export class FilterDataService {
   getMinPrice(){
     let result = Number.MAX_SAFE_INTEGER;
     for (let dish of this.Dishes.dishList){
-        result = Math.min(result, dish.price);
+      result = Math.min(result, dish.price);
     }
     return result;
   }
@@ -72,13 +72,13 @@ export class FilterDataService {
     return Array.from(outputSet).sort();
   }
 
-
   getAllRatings(){
-    let outputSet = new Set();
-    for (let dish of this.Dishes.dishList){
-      outputSet.add(dish.rating);
-    }
-    return Array.from(outputSet).sort();
+    // let outputSet = new Set();
+    // for (let dish of this.Dishes.dishList){
+    //   outputSet.add(dish.rating);
+    // }
+    // return Array.from(outputSet).sort();
+    return [0, 1, 2, 3, 4, 5];
   }
 
   addCuisine(cuisine: any){
@@ -102,13 +102,13 @@ export class FilterDataService {
   }
 
   addRating(rating: any){
-    if (!this.searchRating.includes(rating)){
-      this.searchRating.push(rating);
-    } else {
-      this.searchRating.splice(this.searchRating.indexOf(rating), 1);
-    }
-    let newList = Object.assign([], this.searchRating);
-    this.changeRating(newList);
+    // if (!this.searchRating.includes(rating)){
+    //   this.searchRating.push(rating);
+    // } else {
+    //   this.searchRating.splice(this.searchRating.indexOf(rating), 1);
+    // }
+    // let newList = Object.assign([], this.searchRating);
+    this.changeRating([rating]);
   }
 
   checkIfValid(dish: Dish){
@@ -121,16 +121,16 @@ export class FilterDataService {
     if (this.searchRating.includes(dish.rating) && !this.getAllRatings().includes(dish.rating)){
       this.addRating(dish.rating);
     }
-}
+  }
 
-    resetAll(){
-      this.searchCategory = [];
-      this.searchCuisine = [];
-      this.searchRating = [];
-      this.searchMinPrice = Math.floor(Number((this.getMinPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
-      this.searchMaxPrice = Math.ceil(Number((this.getMaxPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
-      this.searchName = '';
-    }
+  resetAll(){
+    this.searchCategory = [];
+    this.searchCuisine = [];
+    this.searchRating = [];
+    this.searchMinPrice = Math.floor(Number((this.getMinPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
+    this.searchMaxPrice = Math.ceil(Number((this.getMaxPrice()*this.currencyData.currencies[this.currencyData.currentCurrency].value).toFixed(2)));
+    this.searchName = '';
+  }
 
 
 }

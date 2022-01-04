@@ -11,6 +11,7 @@ export class Dish {
     public price: number,
     public description: string,
     public images: string[],
+    public ratingList: {uid: string, rating: number}[],
     public rating: number,
     public reviews: {nick: string, name: string, body: string, date: string|null}[]
     ) {}

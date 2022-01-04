@@ -84,6 +84,9 @@ export class CurrencyAndShopListService {
   }
 
   updateUserDishesData(){
+    if (this.shopList.length === 0){
+      return;
+    }
     const uid = this.authService.userDetails!.uid;
     // @ts-ignore
     let currentOrderedDishes = this.authService.userList.find(item => item.uid === this.authService.userDetails!.uid).dishesOrdered;
@@ -99,7 +102,6 @@ export class CurrencyAndShopListService {
 
     let resultOrderHist;
     if (currentOrderHist){
-      console.log(currentOrderHist)
       currentOrderHist.push(this.getDataToOrderHist());
       resultOrderHist = currentOrderHist;
     } else {
@@ -111,7 +113,7 @@ export class CurrencyAndShopListService {
   }
 
   deleteAllPositions(){
-    this.updateDishesProperties()
+    this.updateDishesProperties();
     this.shopList = [];
     this.getNumOfOrders();
   }

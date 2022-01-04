@@ -24,7 +24,7 @@ interface SliderDetails {
 })
 export class FilterDishesComponent implements OnInit {
   constructor(public _router: Router, public Dishes: ListOfDishesService, public filterData: FilterDataService,
-    public currencyData: CurrencyAndShopListService, public paginInfo: PaginationService, private db: DatabaseDataService) {}
+              public currencyData: CurrencyAndShopListService, public paginInfo: PaginationService, private db: DatabaseDataService) {}
 
   value: number = 0;
   highValue: number = this.filterData.searchMaxPrice;

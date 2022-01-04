@@ -26,11 +26,29 @@
 
 #shopListHeader {
     padding: 5px 10px;
+  font-size: 30px;
 }
 
 #sumOfItems {
     padding: 5px 10px;
     border-top: 2px solid white;
+}
+
+button {
+  background-color: orange;
+  color: white;
+  font-size: 24px;
+  border: 1px solid white;
+  margin: 10px;
+  width: 200px;
+  height: 60px;
+}
+
+button:hover {
+  cursor: pointer;
+  color: orange;
+  background-color: white;
+  border-color: orange;
 }
 
 @media (max-width: 600px) {

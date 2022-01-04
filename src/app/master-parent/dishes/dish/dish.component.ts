@@ -27,6 +27,7 @@ export class DishComponent implements OnInit {
   @Input() images!: string[];
   @Input() maxDishes!: string[];
   @Input() minDishes!: string[];
+  @Input() ratingList!: {uid: string, rating: number}[];
   @Input() rating!: number;
   @Output() addOrderEvent = new EventEmitter<any>();
   @Output() removeOrderEvent = new EventEmitter<any>();
@@ -38,6 +39,18 @@ export class DishComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  getRatingValue(){
+    if (this.ratingList.length === 0){
+      return 0;
+    }
+    let sum = 0;
+    for (let item of this.ratingList){
+      sum += item.rating;
+    }
+    return (sum/this.ratingList.length);
+  }
+
 
 
   addOrder(){

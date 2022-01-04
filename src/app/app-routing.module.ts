@@ -9,6 +9,8 @@ import {PageNotFoundComponent} from "./master-parent/page-not-found/page-not-fou
 import { SignUpComponent} from "./master-parent/sign-up/sign-up.component";
 import { SignInComponent} from "./master-parent/sign-in/sign-in.component";
 import { AdminViewComponent } from "./master-parent/header/admin-view/admin-view.component";
+import { OrderHistComponent } from "./master-parent/order-hist/order-hist.component";
+import { DishesManagerComponent } from "./master-parent/header/dishes-manager/dishes-manager.component";
 import {AuthGuard} from "./guard/auth.guard";
 
 const appRoutes: Routes = [
@@ -18,10 +20,12 @@ const appRoutes: Routes = [
       {path: "dish-item/:name", component: DishDetailsComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard]}
     ] },
   { path: 'new-dish', component: AddItemComponent },
-  { path: 'shop-list', component: ShopListComponent },
+  { path: 'shop-list', component: ShopListComponent, data: {roles: ['Client', 'Admin', "Manager"]}, canActivate: [AuthGuard] },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
-  { path: 'admin-view', component: AdminViewComponent },
+  { path: 'admin-view', component: AdminViewComponent, data: {roles: ['Admin']}, canActivate: [AuthGuard] },
+  { path: 'manager-view', component: DishesManagerComponent, data: {roles: ['Admin', 'Manager']}, canActivate: [AuthGuard]},
+  { path: 'order-hist', component: OrderHistComponent, data: {roles: ['Admin', 'Manager', 'Client']}, canActivate: [AuthGuard]},
   { path: '', redirectTo:'/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]

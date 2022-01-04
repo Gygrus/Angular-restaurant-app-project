@@ -16,15 +16,14 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.authService.userDetails){
-      console.log('Access denied!');
+      alert("Musisz być zalogowany!");
       this.router.navigate(['sign-in']);
       return false;
     }
     const routeRoles = route.data && route.data['roles'];
     const userData = this.authService.userDetails;
     if (!this.authService.checkIfHasRole(userData, routeRoles)){
-      console.log('Access denied!');
-      this.router.navigate(['sign-in']);
+      alert("Odmowa dostępu, brak uprawnień.");
       return false;
     }
     return true;

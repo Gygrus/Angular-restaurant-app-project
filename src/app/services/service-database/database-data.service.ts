@@ -47,7 +47,7 @@ export class DatabaseDataService {
         const data = a.payload.val();
         const key = a.payload.key;
         // @ts-ignore
-        return new Dish(key, data.name, data.cuisine, data.type, data.category, data.ingredients, data.quantity, data.ordered, data.price, data.description, data.images, data.rating, []);
+        return new Dish(key, data.name, data.cuisine, data.type, data.category, data.ingredients, data.quantity, data.ordered, data.price, data.description, data.images, data.ratingList, data.rating, []);
       })
     }));
   }
@@ -75,6 +75,11 @@ export class DatabaseDataService {
   addDishToDB(dish: Dish){
     const dishList = this.db.list('dishesList');
     dishList.push(dish);
+  }
+
+  addRatingToDB(key: string, newRatingList: any){
+    const dishList = this.db.list('dishesList');
+    dishList.update(key, {ratingList: newRatingList});
   }
 
   changeRatingInDB(key: string, value: number){

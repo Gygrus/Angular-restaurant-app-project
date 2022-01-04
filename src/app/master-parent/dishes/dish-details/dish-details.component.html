@@ -1,14 +1,14 @@
 <div id="return" routerLink="/menu" routerLinkActive="active">Powrót</div>
 <div id="imagesCaption" class="section">Zdjęcia poglądowe</div>
 <div id="slider">
-    <div (click)="prevImage($event)"><img src="../../assets/images/białe-2.svg"></div>
-    <img id="sliderImage" alt="dishImage" [src]="dishDetails.images[currentImage]">
-    <div (click)="nextImage($event)"><img src="../../assets/images/białe-1.svg"></div>
+  <div (click)="prevImage($event)"><img src="../../assets/images/białe-2.svg"></div>
+  <img id="sliderImage" alt="dishImage" [src]="dishDetails.images[currentImage]">
+  <div (click)="nextImage($event)"><img src="../../assets/images/białe-1.svg"></div>
 </div>
 
 
 <div id="wrapper">
-<div id="leftContainer" class="container">
+  <div id="leftContainer" class="container">
     <div id="nameDiv" class="section">Nazwa dania: {{dishDetails.name}}</div>
     <div id="cuisineDiv" class="section">Rodzaj kuchni: {{dishDetails.cuisine}}</div>
     <div id="typeDiv" class="section">Typ dania: {{dishDetails.type}}</div>
@@ -16,76 +16,85 @@
     <div id="quantityDiv" class="section">Dostępna liczba sztuk: {{dishDetails.quantity}}</div>
     <div id="orderedDiv" class="section">Zamówione sztuki: {{dishDetails.ordered}}</div>
     <div id="priceDiv" class="section">Cena dania: {{(dishDetails.price*currencies[CurrencyDetails.currentCurrency].value).toFixed(2)}} {{currencies[CurrencyDetails.currentCurrency].symbol}}</div>
-    <div id="ratingDiv" class="section">Ocena dania: {{dishDetails.rating}}/5</div>
-    <div id="ingredientsDiv" class="section">Składniki: 
-        <ul>
-            <li *ngFor="let ingredient of dishDetails.ingredients">{{ingredient}}</li>
-        </ul>
+    <div id="ratingDiv" class="section">Ocena dania: {{dishDetails.rating.toFixed(2)}}/5</div>
+    <div id="ingredientsDiv" class="section">Składniki:
+      <ul>
+        <li *ngFor="let ingredient of dishDetails.ingredients">{{ingredient}}</li>
+      </ul>
     </div>
     <div id="descriptionDiv" class="section">Opis: {{dishDetails.description}}</div>
-</div>
-<div id="rightContainer" class="container">
+  </div>
+  <div id="rightContainer" class="container">
     <div class="rightSec">
-        Oceń danie
+      Oceń danie
     </div>
     <div id="rating">
-        <span *ngFor="let starno of stars"><img id="star-{{starno}}"
-             (click)="addRating(starno)"
-             [class.isFilled]="dishDetails.rating >= starno+1" 
-             class="star" src="../../assets/images/icons8-christmas-star-24.png" alt="star"></span>
-    </div> 
+        <span *ngFor="let starno of stars">
+          <img id="star-{{starno}}"
+          (click)="addRating(starno)"
+          [class.isFilled]="getUserRating() >= starno+1"
+          class="star" src="../../assets/images/icons8-christmas-star-24.png" alt="star"></span>
+        <div>{{message}}</div>
+    </div>
     <div class="rightSec">
-        Zamów danie
+      Zamów danie
     </div>
     <span class="quantity" *ngIf="dishDetails.quantity > 0"
-        [ngStyle]="{'color': dishDetails.quantity > 3 ? 'green': 'red'}">Pozostało: {{dishDetails.quantity}}</span>
-        <span class="quantity" *ngIf="dishDetails.quantity === 0"
-        [ngStyle]="{'color': 'red'}">Brak dań!</span>
+          [ngStyle]="{'color': dishDetails.quantity > 3 ? 'green': 'red'}">Pozostało: {{dishDetails.quantity}}</span>
+    <span class="quantity" *ngIf="dishDetails.quantity === 0"
+          [ngStyle]="{'color': 'red'}">Brak dań!</span>
     <div id="interactive">
-        <button id="removeButton" 
-        [class.isInvisible]="dishDetails.ordered <= 0"
-        (click)="removeOrder()">Usuń z koszyka</button>
-        <button id="addButton" 
-        [class.isInvisible]="dishDetails.quantity <= 0"
-        (click)="addOrder()">Dodaj do koszyka</button>
+      <button id="removeButton"
+              [class.isInvisible]="dishDetails.ordered <= 0"
+              (click)="removeOrder()">Usuń z koszyka</button>
+      <button id="addButton"
+              [class.isInvisible]="dishDetails.quantity <= 0"
+              (click)="addOrder()">Dodaj do koszyka</button>
     </div>
 
     <div class="rightSec">
-        Dodaj recenzję
+      Dodaj recenzję
     </div>
     <form [formGroup]="reviewDetails" (ngSubmit)="onSubmit()" id="reviewForm">
-        
-
-        <label for="nick">Nick:</label>
-        <input id="nick" type="text" formControlName="nick">
-        <p class="alert" *ngIf="reviewDetails.get('nick')!.hasError('required') && (reviewDetails.get('nick')!.touched || reviewDetails.get('nick')!.dirty)">Nick jest wymagany</p>
-
-        <label for="name">Nazwa:</label>
-        <input id="name" type="text" formControlName="name">
-        <p class="alert" *ngIf="reviewDetails.get('name')!.hasError('required') && (reviewDetails.get('name')!.touched || reviewDetails.get('name')!.dirty)">Nazwa jest wymagana</p>
-
-        <label for="date">Data dodania (opcjonalna):</label>
-        <input id="date" type="date" formControlName="date">
-
-        <label for="body">Treść:</label>
-        <textarea id="body" type="text" formControlName="body"></textarea>
-        <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('required') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja jest wymagana</p>
-        <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('minlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja musi mieć co najmniej 50 znaków</p>
-        <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('maxlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja nie może mieć więcej niż 500 znaków</p>
 
 
-        <button type="submit" [disabled]="!reviewDetails.valid" id = "submitButton">Dodaj recenzję</button>
+      <label for="nick">Nick:</label>
+      <input id="nick" type="text" formControlName="nick">
+      <p class="alert" *ngIf="reviewDetails.get('nick')!.hasError('required') && (reviewDetails.get('nick')!.touched || reviewDetails.get('nick')!.dirty)">Nick jest wymagany</p>
+
+      <label for="name">Nazwa:</label>
+      <input id="name" type="text" formControlName="name">
+      <p class="alert" *ngIf="reviewDetails.get('name')!.hasError('required') && (reviewDetails.get('name')!.touched || reviewDetails.get('name')!.dirty)">Nazwa jest wymagana</p>
+
+      <label for="date">Data dodania (opcjonalna):</label>
+      <input id="date" type="date" formControlName="date">
+
+      <label for="body">Treść:</label>
+      <textarea id="body" type="text" formControlName="body"></textarea>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('required') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja jest wymagana</p>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('minlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja musi mieć co najmniej 50 znaków</p>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('maxlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja nie może mieć więcej niż 500 znaków</p>
+      <p class="alert" *ngIf="
+      (this.authService.checkIfHasRole(this.authService.userDetails, ['Client']) &&
+       !this.authService.checkIfHasRole(this.authService.userDetails, ['Manager', 'Admin']) &&
+       !authService.checkIfUserBought(this.dishDetails.name))">Żeby dodać recenzję, trzeba najpierw zamówić danie lub mieć uprawnienia Managera</p>
+
+      <button type="submit" [disabled]="!reviewDetails.valid ||
+      (this.authService.checkIfHasRole(this.authService.userDetails, ['Client']) &&
+       !this.authService.checkIfHasRole(this.authService.userDetails, ['Manager', 'Admin']) &&
+       !authService.checkIfUserBought(this.dishDetails.name))"
+              id = "submitButton">Dodaj recenzję</button>
     </form>
-</div>
+  </div>
 </div>
 <div class="container">
-    <div class="rightSec">
-        Recenzje klientów:
-    </div>
-    <div class="review" *ngFor="let review of dishDetails.reviews">
-        <h2>{{review.nick}}</h2>
-        <h5>{{review.name}}</h5>
-        <p>{{review.body}}</p>
-        <p>{{review.date}}</p>
-    </div>
+  <div class="rightSec">
+    Recenzje klientów:
+  </div>
+  <div class="review" *ngFor="let review of dishDetails.reviews">
+    <h2>{{review.nick}}</h2>
+    <h5>{{review.name}}</h5>
+    <p>{{review.body}}</p>
+    <p>{{review.date}}</p>
+  </div>
 </div>

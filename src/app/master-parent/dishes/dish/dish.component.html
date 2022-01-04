@@ -1,28 +1,28 @@
 
 <div class="dishContainer"
-[class.isMax]="maxDishes.indexOf(name) > -1"
-[class.isMin]="minDishes.indexOf(name) > -1">
-    <img class="dishImg" src={{images[0]}} alt = "Tutaj powinno być zdjęcie danej potrawy" [routerLink]="['./dish-item/', name]" >
-    <div class="cardElement" id="name">{{name | uppercase}}</div>
-    <div class="cardElement"  id="cuisine">{{cuisine | uppercase}}</div>
-    <div class="cardElement"  id="category">{{category}}</div>
-    <div class="cardElement"  id="type">{{type}}</div>
-    <div class="cardElement"  id="price">Cena: {{(price*currencies[currency].value).toFixed(2)}}{{currencies[currency].symbol}}</div>
-    <div id="interactive">
-        <button id="removeButton" *ngIf="this.authService.userDetails"
-        [class.isInvisible]="sold <= 0"
-        (click)="removeOrder()">-</button>
-        <span class="quantity" *ngIf="quantity > 0"
-        [ngStyle]="{'color': quantity > 3 ? 'green': 'red'}">Pozostało: {{quantity}}</span>
-        <span class="quantity" *ngIf="quantity === 0"
-        [ngStyle]="{'color': 'red'}">Brak dań!</span>
-        <button id="addButton" *ngIf="this.authService.userDetails"
-        [class.isInvisible]="quantity <= 0"
-        (click)="addOrder()">+</button>
-    </div>
-<!--    <button id="removeDish" (click)="removeDish()">X</button>-->
-    <div id="rating">
-        <h4>Ocena: {{rating}}/5</h4>
-    </div>
+     [class.isMax]="maxDishes.indexOf(name) > -1"
+     [class.isMin]="minDishes.indexOf(name) > -1">
+  <img class="dishImg" src={{images[0]}} alt = "Tutaj powinno być zdjęcie danej potrawy" [routerLink]="['./dish-item/', name]" >
+  <div class="cardElement" id="name">{{name | uppercase}}</div>
+  <div class="cardElement"  id="cuisine">{{cuisine | uppercase}}</div>
+  <div class="cardElement"  id="category">{{category}}</div>
+  <div class="cardElement"  id="type">{{type}}</div>
+  <div class="cardElement"  id="price">Cena: {{(price*currencies[currency].value).toFixed(2)}}{{currencies[currency].symbol}}</div>
+  <div id="interactive">
+    <button id="removeButton" *ngIf="this.authService.userDetails"
+            [class.isInvisible]="sold <= 0"
+            (click)="removeOrder()">-</button>
+    <span class="quantity" *ngIf="quantity > 0"
+          [ngStyle]="{'color': quantity > 3 ? 'green': 'red'}">Pozostało: {{quantity}}</span>
+    <span class="quantity" *ngIf="quantity === 0"
+          [ngStyle]="{'color': 'red'}">Brak dań!</span>
+    <button id="addButton" *ngIf="this.authService.userDetails"
+            [class.isInvisible]="quantity <= 0"
+            (click)="addOrder()">+</button>
+  </div>
+  <!--    <button id="removeDish" (click)="removeDish()">X</button>-->
+  <div id="rating">
+    <h4>Ocena: {{rating.toFixed(2)}}/5</h4>
+  </div>
 
 </div>

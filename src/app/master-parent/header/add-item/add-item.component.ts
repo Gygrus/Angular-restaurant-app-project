@@ -15,85 +15,86 @@ import {DatabaseDataService} from "../../../services/service-database/database-d
 export class AddItemComponent implements OnInit {
 
 
-itemDetails = this.fb.group({
-  name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), this.duplicateNameValidator.bind(this)]],
-  cuisine: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-  type: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-  category: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-  ingredients: this.fb.array([
-    this.fb.control('')
-  ]),
-  quantity: [0, [Validators.required, Validators.min(0)]],
-  price: [0, [Validators.required, Validators.min(0)]],
-  description: ['', Validators.required],
-  images: this.fb.array([
-    this.fb.control('')
-  ])
-})
+  itemDetails = this.fb.group({
+    name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), this.duplicateNameValidator.bind(this)]],
+    cuisine: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+    type: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+    category: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+    ingredients: this.fb.array([
+      this.fb.control('')
+    ]),
+    quantity: [0, [Validators.required, Validators.min(0)]],
+    price: [0, [Validators.required, Validators.min(0)]],
+    description: ['', Validators.required],
+    images: this.fb.array([
+      this.fb.control('')
+    ])
+  })
 
-duplicateNameValidator(control: FormControl){
-  let name = control.value;
-  if (name && this.Dishes.dishList.map(item => item.name).includes(name)){
-    return {
-      duplicateName: {
-        name: name
+  duplicateNameValidator(control: FormControl){
+    let name = control.value;
+    if (name && this.Dishes.dishList.map(item => item.name).includes(name)){
+      return {
+        duplicateName: {
+          name: name
+        }
       }
     }
+    return null
   }
-  return null
-}
 
-get ingredients() {
-  return this.itemDetails.get('ingredients') as FormArray;
-}
+  get ingredients() {
+    return this.itemDetails.get('ingredients') as FormArray;
+  }
 
-addIngredient() {
-  this.ingredients.push(this.fb.control(''))
-}
+  addIngredient() {
+    this.ingredients.push(this.fb.control(''))
+  }
 
-get images() {
-  return this.itemDetails.get('images') as FormArray;
-}
+  get images() {
+    return this.itemDetails.get('images') as FormArray;
+  }
 
-addImage() {
-  this.images.push(this.fb.control(''));
-}
+  addImage() {
+    this.images.push(this.fb.control(''));
+  }
 
-onSubmit() {
-  this.addItem(this.itemDetails.value);
-  this.itemDetails.reset();
-  this.filterData.resetAll();
-  this.paginInfo.setDishes();
-}
+  onSubmit() {
+    this.addItem(this.itemDetails.value);
+    this.itemDetails.reset();
+    this.filterData.resetAll();
+    this.paginInfo.setDishes();
+  }
 
-addItem(item: any){
-  const newItem: Dish = {
-    key: "",
-    name: item.name,
-    cuisine: item.cuisine,
-    type: item.type,
-    category: item.category,
-    ingredients: item.ingredients,
-    quantity: item.quantity,
-    ordered: 0,
-    price: item.price,
-    description: item.description,
-    images: item.images,
-    rating: 0,
-    reviews: []
-  };
-  this.db.addDishToDB(newItem);
-  this.Dishes.maxDishes = this.Dishes.mostExpensive();
-  this.Dishes.minDishes = this.Dishes.leastExpensive();
-}
+  addItem(item: any){
+    const newItem: Dish = {
+      key: "",
+      name: item.name,
+      cuisine: item.cuisine,
+      type: item.type,
+      category: item.category,
+      ingredients: item.ingredients,
+      quantity: item.quantity,
+      ordered: 0,
+      price: item.price,
+      description: item.description,
+      images: item.images,
+      ratingList: [],
+      rating: 0,
+      reviews: []
+    };
+    this.db.addDishToDB(newItem);
+    this.Dishes.maxDishes = this.Dishes.mostExpensive();
+    this.Dishes.minDishes = this.Dishes.leastExpensive();
+  }
 
-constructor(private fb: FormBuilder,
-            public Dishes: ListOfDishesService,
-            public filterData: FilterDataService,
-            public paginInfo: PaginationService,
-            public db: DatabaseDataService) { }
+  constructor(private fb: FormBuilder,
+              public Dishes: ListOfDishesService,
+              public filterData: FilterDataService,
+              public paginInfo: PaginationService,
+              public db: DatabaseDataService) { }
 
-ngOnInit(): void {
-}
+  ngOnInit(): void {
+  }
 
 }

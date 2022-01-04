@@ -10,10 +10,11 @@
     routerLink="/sign-in" class="borderclass hoverclass" routerLinkActive="active">Zaloguj się</div>
   <div  *ngIf="!authService.userDetails"
     routerLink="/register-user" class="borderclass hoverclass" routerLinkActive="active">Zarejestruj się</div>
-  <div *ngIf="authService.userDetails" class="borderclass">{{authService.userDetails.displayName}}</div>
+  <div *ngIf="authService.userDetails" class="borderclass" [ngStyle]="{'color': 'steelblue'}">{{authService.userDetails.displayName}}</div>
   <div *ngIf="authService.userDetails"
     class="borderclass hoverclass" routerLinkActive="active" (click)="authService.SignOut()"
   >Wyloguj się</div>
+  <div *ngIf="authService.userDetails" id="orderhist" class="hoverclass" routerLink="/order-hist" routerLinkActive="active">Historia</div>
     <div id="currency" class="borderclass">
       <p>Waluta &nbsp;</p>
       <button id="euro"
@@ -24,21 +25,22 @@
               (click)="setCurrency('usd')">$</button>
     </div>
     <div id="details"
+    *ngIf="this.authService.userDetails"
     [ngStyle]="{'background-color': curAndShopList.numOfOrders > 10? 'blue':'orange'}">
         <span>Zamówionych: {{curAndShopList.numOfOrders}}</span>
         <div id="quantity"></div>
     </div>
     <div id="shopListButton" routerLink="/shop-list" class="hoverclass" routerLinkActive="active"
+    *ngIf="this.authService.userDetails"
     ><img src="https://drive.google.com/uc?export=view&id=1KexHSrvrEX1Mkrnc36bpc0czlOWpG8fr" alt="shoppingcart"
           id="shoppingCart"></div>
 </div>
 <div id="hiddenTools" *ngIf="
-this.authService.userDetails">
-  <div id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina
+this.authService.userDetails && this.authService.checkIfHasRole(this.authService.userDetails, ['Admin', 'Manager'])">
+  <div *ngIf="this.authService.checkIfHasRole(this.authService.userDetails, ['Admin'])"
+       id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina
   </div>
-  <div id="managerView" class="borderclass hoverclass" routerLink="" routerLinkActive="active"
-  *ngIf="this.authService.userDetails &&
-  this.authService.checkIfHasRole(this.authService.userDetails, ['Admin', 'Manager'])">Manager dań</div>
+  <div id="managerView" class="borderclass hoverclass" routerLink="manager-view" routerLinkActive="active" >Manager dań</div>
 </div>
 <router-outlet></router-outlet>
 

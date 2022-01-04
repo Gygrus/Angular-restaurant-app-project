@@ -23,7 +23,7 @@ export class AuthService {
               private ngZone: NgZone,
               private db: DatabaseDataService) {
     this.currentUser = this.afAuth.authState;
-    this.currentUser.subscribe( user => {
+    this.afAuth.authState.subscribe( user => {
       this.userDetails = user;
     })
     this.db.usersList.subscribe(e => {
@@ -95,6 +95,16 @@ export class AuthService {
       }
     }
     return false;
+  }
+
+  checkIfUserBought(name: string){
+    const dishesOrdered = this.userList!.find(user => user.uid === this.userDetails!.uid).dishesOrdered;
+    return !!(dishesOrdered && dishesOrdered.includes(name));
+  }
+
+  getUserHist(){
+    const userID = this.userDetails!.uid;
+    return this.userList!.find(user => user.uid === userID).orderHist;
   }
 
 }
