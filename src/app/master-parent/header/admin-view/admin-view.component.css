@@ -16,3 +16,58 @@ button:hover {
   background-color: orange;
   border-color: white;
 }
+
+#userContainer {
+  max-width: 1200px;
+  width: 90vw;
+  text-align: center;
+  margin: auto;
+}
+
+.userBox {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 3px;
+  margin: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px;
+  overflow: hidden;
+}
+
+.userInfo {
+  margin-left: 0px;
+}
+
+.banSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userBox:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: steelblue 1px 1px 10px;
+}
+
+h4, h5 {
+  margin: 4px;
+}
+
+.roles {
+  margin-top: 10px;
+  text-align: center;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .userBox {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}

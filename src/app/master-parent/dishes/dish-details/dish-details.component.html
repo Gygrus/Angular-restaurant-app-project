@@ -16,7 +16,8 @@
     <div id="quantityDiv" class="section">Dostępna liczba sztuk: {{dishDetails.quantity}}</div>
     <div id="orderedDiv" class="section">Zamówione sztuki: {{dishDetails.ordered}}</div>
     <div id="priceDiv" class="section">Cena dania: {{(dishDetails.price*currencies[CurrencyDetails.currentCurrency].value).toFixed(2)}} {{currencies[CurrencyDetails.currentCurrency].symbol}}</div>
-    <div id="ratingDiv" class="section">Ocena dania: {{dishDetails.rating.toFixed(2)}}/5</div>
+    <div id="ratingDiv" class="section">Ocena dania: {{this.correctRatingDisplay()}}</div>
+    <div id="ratingNumDiv" class="section">Ilość ocen: {{dishDetails.ratingList? dishDetails.ratingList.length : 0}}</div>
     <div id="ingredientsDiv" class="section">Składniki:
       <ul>
         <li *ngFor="let ingredient of dishDetails.ingredients">{{ingredient}}</li>
@@ -71,17 +72,21 @@
 
       <label for="body">Treść:</label>
       <textarea id="body" type="text" formControlName="body"></textarea>
-      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('required') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja jest wymagana</p>
-      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('minlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja musi mieć co najmniej 50 znaków</p>
-      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('maxlength') && (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja nie może mieć więcej niż 500 znaków</p>
-      <p class="alert" *ngIf="
-      (this.authService.checkIfHasRole(this.authService.userDetails, ['Client']) &&
-       !this.authService.checkIfHasRole(this.authService.userDetails, ['Manager', 'Admin']) &&
-       !authService.checkIfUserBought(this.dishDetails.name))">Żeby dodać recenzję, trzeba najpierw zamówić danie lub mieć uprawnienia Managera</p>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('required') &&
+      (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja jest wymagana</p>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('minlength') &&
+      (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja musi mieć co najmniej 50 znaków</p>
+      <p class="alert" *ngIf="reviewDetails.get('body')!.hasError('maxlength') &&
+      (reviewDetails.get('body')!.touched || reviewDetails.get('body')!.dirty)">Recenzja nie może mieć więcej niż 500 znaków</p>
+      <p class="alert" *ngIf=" this.authService.userDetails &&
+      (this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Client']) &&
+       !this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Manager', 'Admin']) &&
+       !authService.checkIfUserBought(this.dishDetails.name)) || this.authService.checkIfBanned(this.authService.userDetails)">
+        Żeby dodać recenzję, nie można mieć bana oraz trzeba najpierw zamówić danie lub mieć uprawnienia Managera</p>
 
-      <button type="submit" [disabled]="!reviewDetails.valid ||
-      (this.authService.checkIfHasRole(this.authService.userDetails, ['Client']) &&
-       !this.authService.checkIfHasRole(this.authService.userDetails, ['Manager', 'Admin']) &&
+      <button type="submit" [disabled]="!reviewDetails.valid || this.authService.checkIfBanned(this.authService.userDetails) ||
+      (this.authService.userDetails && this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Client']) &&
+       !this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Manager', 'Admin']) &&
        !authService.checkIfUserBought(this.dishDetails.name))"
               id = "submitButton">Dodaj recenzję</button>
     </form>

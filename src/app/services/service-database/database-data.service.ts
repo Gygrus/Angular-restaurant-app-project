@@ -34,6 +34,8 @@ export class DatabaseDataService {
           // @ts-ignore
           orderHist: data.orderHist,
           // @ts-ignore
+          isBanned: data.isBanned,
+          // @ts-ignore
           roles: data.roles
         };
         return user
@@ -64,7 +66,14 @@ export class DatabaseDataService {
   updateUserOrderedDishes(uid: string, orderedDishes: Partial<unknown>){
     // @ts-ignore
     this.db.list('users').update(uid, {dishesOrdered: orderedDishes});
-    // this.db.database.ref('users').child(uid)
+  }
+
+  updateUserRoles(uid: string, roles: any){
+    this.db.list('users').update(uid, {roles: roles});
+  }
+
+  updateBanStatus(uid: string, ban: any){
+    this.db.list('users').update(uid, {isBanned: ban});
   }
 
   removeDishFromDB(key: string){

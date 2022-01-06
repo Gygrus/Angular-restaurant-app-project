@@ -1,9 +1,14 @@
 <div id="container">
   <h3>Historia zamówień</h3>
-  <div *ngFor="let order of this.authService.getUserHist()" class="singleOrder">
-    <div *ngFor="let dish of order.dishes">
-      <p>{{dish.name}}x{{dish.quantity}}</p>
+  <div *ngFor="let order of this.authService.getUserHist().reverse()" class="singleOrder">
+    <div>
+      <div *ngFor="let dish of order.dishes" class="dishItem">
+        <p>{{dish.name}} x{{dish.quantity}}</p>
+      </div>
+      <div>Wartość zamówienia: {{order.value}}</div>
     </div>
-    <div>{{order.value}}</div>
+    <div class="dateSection">
+      Data zamówienia: {{order.date}}
+    </div>
   </div>
 </div>

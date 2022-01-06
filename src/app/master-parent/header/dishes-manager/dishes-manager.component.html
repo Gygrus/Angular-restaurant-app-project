@@ -1,1 +1,35 @@
-<p>dishes-manager works!</p>
+<app-add-item></app-add-item>
+<div id="dishesContainer">
+  <div id="title">Potrawy</div>
+  <div *ngFor="let dish of Dishes.dishList" class="dishBox">
+    <div class="middle">
+      <p>{{dish.name}}</p>
+      <p>{{dish.cuisine}}</p>
+    </div>
+    <div class="dishData">
+      <div class="left">
+        <p>Typ dania: {{dish.type}}</p>
+        <p>Kategoria: {{dish.category}}</p>
+        <p>Sztuki w magazynie: {{dish.quantity}}</p>
+        <p>Obecnie zamówionych: {{dish.ordered}}</p>
+        <p>Cena: {{(dish.price*this.curAndShopService.currencies[this.curAndShopService.currentCurrency].value).toFixed(2)}}
+          {{this.curAndShopService.currencies[this.curAndShopService.currentCurrency].symbol}}</p>
+        <p>Średnia ocena: {{dish.rating}}</p>
+      </div>
+      <div class="right">
+        <p>Składniki: </p>
+        <ul>
+          <li *ngFor="let ingredient of dish.ingredients">{{ingredient}}</li>
+        </ul>
+        <p>Url zdjęć: </p>
+        <ul>
+          <li *ngFor="let image of dish.images">{{image}}</li>
+        </ul>
+      </div>
+    </div>
+    <div id="buttonWrapper">
+      <button id="removeDishButton"
+              (click)="removeDish(dish)">Remove</button>
+    </div>
+  </div>
+</div>

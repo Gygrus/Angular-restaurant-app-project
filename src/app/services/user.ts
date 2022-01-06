@@ -1,9 +1,3 @@
-// export interface Roles {
-//   client?: boolean;
-//   manager?: boolean;
-//   admin?: boolean;
-// }
-
 
 export interface User {
   uid: string;
@@ -11,5 +5,6 @@ export interface User {
   displayName: string;
   dishesOrdered: string[];
   orderHist: string[][];
+  isBanned: boolean;
   roles: string[];
 }

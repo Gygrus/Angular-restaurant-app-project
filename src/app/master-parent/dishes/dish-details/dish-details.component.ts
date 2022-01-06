@@ -77,11 +77,20 @@ export class DishDetailsComponent implements OnInit {
     return (sum/this.dishDetails.ratingList.length);
   }
 
+  correctRatingDisplay() {
+    if (this.dishDetails.rating === 0){
+      return "Brak ocen";
+    } else {
+      return this.dishDetails.rating.toFixed(2)+"/5";
+    }
+  }
+
   addRating(star: any) {
     if (this.authService.userDetails &&
-      this.authService.checkIfHasRole(this.authService.userDetails, ["Admin"]) ||
-      (this.authService.checkIfHasRole(this.authService.userDetails, ["Client"]) &&
-      this.authService.checkIfUserBought(this.dishDetails.name))) {
+      (this.authService.checkIfHasRole(this.authService.userDetails.uid, ["Admin"]) ||
+      (this.authService.checkIfHasRole(this.authService.userDetails.uid, ["Client"]) &&
+      this.authService.checkIfUserBought(this.dishDetails.name))) &&
+      !this.authService.checkIfBanned(this.authService.userDetails)) {
       const userID = this.authService.userDetails!.uid;
       let ratingList;
       ratingList = this.dishDetails.ratingList;

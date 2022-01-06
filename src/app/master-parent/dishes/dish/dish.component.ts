@@ -51,6 +51,13 @@ export class DishComponent implements OnInit {
     return (sum/this.ratingList.length);
   }
 
+  correctRatingDisplay() {
+    if (this.rating === 0){
+      return "Brak ocen";
+    } else {
+      return this.rating.toFixed(2)+"/5";
+    }
+  }
 
 
   addOrder(){

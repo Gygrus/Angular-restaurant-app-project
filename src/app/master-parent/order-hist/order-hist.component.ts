@@ -8,7 +8,8 @@ import {AuthService} from "../../services/serviceauth/auth.service";
 })
 export class OrderHistComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }

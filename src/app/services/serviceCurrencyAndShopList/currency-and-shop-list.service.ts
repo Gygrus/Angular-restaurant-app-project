@@ -131,7 +131,8 @@ export class CurrencyAndShopListService {
   }
 
   getDataToOrderHist(){
-    return {dishes: this.shopList, value: this.sumAll()+this.currencies[this.currentCurrency].symbol};
+    let currentDate = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
+    return {dishes: this.shopList, value: this.sumAll()+this.currencies[this.currentCurrency].symbol, date: currentDate};
   }
 
   updateDishesProperties(){

@@ -36,8 +36,8 @@
           id="shoppingCart"></div>
 </div>
 <div id="hiddenTools" *ngIf="
-this.authService.userDetails && this.authService.checkIfHasRole(this.authService.userDetails, ['Admin', 'Manager'])">
-  <div *ngIf="this.authService.checkIfHasRole(this.authService.userDetails, ['Admin'])"
+this.authService.userDetails && this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Admin', 'Manager'])">
+  <div *ngIf="this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Admin'])"
        id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina
   </div>
   <div id="managerView" class="borderclass hoverclass" routerLink="manager-view" routerLinkActive="active" >Manager dań</div>

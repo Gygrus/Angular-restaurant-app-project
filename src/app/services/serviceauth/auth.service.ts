@@ -16,6 +16,7 @@ export class AuthService {
   currentUser: Observable<firebase.User | null | undefined>;
   userDetails: firebase.User | null | undefined = null;
   userList: any[] | undefined;
+  userRoles: any[] | undefined;
 
   constructor(public afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -28,6 +29,8 @@ export class AuthService {
     })
     this.db.usersList.subscribe(e => {
       this.userList = e;
+      // @ts-ignore
+      this.userRoles = e.find((item: { uid: any; }) => item.uid === this.userDetails.uid).roles;
     })
   }
 
@@ -73,29 +76,27 @@ export class AuthService {
       displayName: name,
       dishesOrdered: [],
       orderHist: [],
+      isBanned: false,
       roles: roles
     }
     this.db.addUserToDB(userData);
   }
 
-  getUserRoles(uid: any){
-    // @ts-ignore
-    return this.userList.find(item => item.uid === uid).roles;
-  }
-
-  checkIfHasRole(user: any, roles: any[]){
-    if (user === null || user === undefined){
-      return false;
-    }
-    const curRoles = this.getUserRoles(user.uid);
-    for (let role of roles){
-      // @ts-ignore
-      if (curRoles.includes(role)){
-        return true;
+  checkIfHasRole(userID: any, roles: any[]){
+    let curRoles = [];
+    if (this.userList){ // @ts-ignore
+      curRoles = this.userList.find((item: { uid: any; }) => item.uid === userID).roles; }
+    if (curRoles) {
+      for (let role of roles) {
+        // @ts-ignore
+        if (curRoles.includes(role)) {
+          return true;
+        }
       }
     }
     return false;
   }
+
 
   checkIfUserBought(name: string){
     const dishesOrdered = this.userList!.find(user => user.uid === this.userDetails!.uid).dishesOrdered;
@@ -104,7 +105,24 @@ export class AuthService {
 
   getUserHist(){
     const userID = this.userDetails!.uid;
-    return this.userList!.find(user => user.uid === userID).orderHist;
+    let result = [];
+    if (this.userList) {
+      let orderHist = this.userList!.find(user => user.uid === userID).orderHist
+      if (orderHist){
+        for (let item of this.userList!.find(user => user.uid === userID).orderHist){
+          if (item){ result.push(item); }
+        }
+      }
+      return result;
+    }
+    return []
   }
+
+  checkIfBanned(userToCheck: any) {
+    if (this.userList){
+      return this.userList.find(user => user.uid === userToCheck.uid).isBanned;
+    }
+  }
+
 
 }

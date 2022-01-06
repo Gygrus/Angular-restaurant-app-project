@@ -21,14 +21,13 @@ export class AddItemComponent implements OnInit {
     type: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
     category: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
     ingredients: this.fb.array([
-      this.fb.control('')
+      this.fb.control('', Validators.required)
     ]),
     quantity: [0, [Validators.required, Validators.min(0)]],
     price: [0, [Validators.required, Validators.min(0)]],
     description: ['', Validators.required],
     images: this.fb.array([
-      this.fb.control('')
-    ])
+      this.fb.control('', Validators.required)])
   })
 
   duplicateNameValidator(control: FormControl){
@@ -67,18 +66,21 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem(item: any){
+    let ingredientsCorrected = item.ingredients.filter((e: any) => String(e).trim());
+    let imagesCorrected = item.images.filter((e: any) => String(e).trim());;
+
     const newItem: Dish = {
       key: "",
       name: item.name,
       cuisine: item.cuisine,
       type: item.type,
       category: item.category,
-      ingredients: item.ingredients,
+      ingredients: ingredientsCorrected,
       quantity: item.quantity,
       ordered: 0,
       price: item.price,
       description: item.description,
-      images: item.images,
+      images: imagesCorrected,
       ratingList: [],
       rating: 0,
       reviews: []

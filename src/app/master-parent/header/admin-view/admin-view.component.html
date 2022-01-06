@@ -3,5 +3,42 @@
   <button id="local" class="form-check-input" (click)="setPersistence(localOption)">Local</button>
   <button id="session" class="form-check-input" (click)="setPersistence(sessionOption)">Session</button>
   <button id="none" class="form-check-input" (click)="setPersistence(noneOption)">None</button>
+</div>
 
+<div id="userContainer">
+  <h2>Użytkownicy</h2>
+  <div class="userBox"
+       *ngFor="let user of this.authService.userList"
+       [ngStyle]="{'background-color': user.isBanned === true ? 'grey' : 'white'}">
+    <div class="userInfo">
+      <h4>Nazwa: {{user.displayName}}</h4>
+      <h5>ID: {{user.uid}}</h5>
+    </div>
+    <div class="roles">
+      <div class="formGroup">
+        <input type="checkbox"  class="form-check-input"
+               [defaultChecked]="this.authService.checkIfHasRole(user.uid, ['Client'])"
+               (change)="changeRoles(user, 'Client')"
+               #userRoleMenager>
+        <label  class="form-check-label">Client</label>
+        <input type="checkbox" class="form-check-input"
+               [defaultChecked]="this.authService.checkIfHasRole(user.uid, ['Manager'])"
+               (change)="changeRoles(user, 'Manager')"
+               #userRoleAdmin>
+        <label  class="form-check-label">Manager</label>
+        <input type="checkbox" class="form-check-input"
+               [defaultChecked]="this.authService.checkIfHasRole(user.uid, ['Admin'])"
+               (change)="changeRoles(user, 'Admin')"
+               #userRoleAdmin>
+        <label  class="form-check-label">Admin</label>
+      </div>
+    </div>
+    <div class="banSection">
+      <input type="checkbox" class="form-check-input"
+             [defaultChecked]="user.isBanned"
+             (change)="changeBanStatus(user)"
+             #userRoleMenager>
+      <label class="form-check-label">Zbanowany</label>
+    </div>
+  </div>
 </div>

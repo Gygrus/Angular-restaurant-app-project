@@ -20,7 +20,7 @@ const appRoutes: Routes = [
       {path: "dish-item/:name", component: DishDetailsComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard]}
     ] },
   { path: 'new-dish', component: AddItemComponent },
-  { path: 'shop-list', component: ShopListComponent, data: {roles: ['Client', 'Admin', "Manager"]}, canActivate: [AuthGuard] },
+  { path: 'shop-list', component: ShopListComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard] },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'admin-view', component: AdminViewComponent, data: {roles: ['Admin']}, canActivate: [AuthGuard] },

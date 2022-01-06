@@ -17,7 +17,12 @@ export class PaginationService {
   constructor(public Dishes: ListOfDishesService,
               public CurrencyData: CurrencyAndShopListService,
               public FilterData: FilterDataService,
-              public db: DatabaseDataService) { }
+              public db: DatabaseDataService) {
+    this.db.dishesList.subscribe( () => {
+      this.setDishes();
+    }
+    )
+  }
   pipe = new FilterDishesPipe;
 
   filteredDishes: Dish[] = this.Dishes.dishList;

@@ -33,10 +33,6 @@
       (removeDishEvent)="removeDish($event)"
       (addRatingEvent)="setRanking($event)"
     ></app-dish>
-    <div id="buttonWrapper">
-      <button id="removeDishButton"
-              (click)="removeDish(dish)">Remove</button>
-    </div>
   </div>
 </div>
 <app-pagination-bar *ngIf="route.children.length === 0"></app-pagination-bar>

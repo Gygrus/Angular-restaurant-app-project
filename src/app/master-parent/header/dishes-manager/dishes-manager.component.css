@@ -1,0 +1,72 @@
+#dishesContainer{
+  margin: auto;
+  max-width: 1200px;
+  width: 90vw;
+  text-align: center;
+}
+
+#title {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.dishBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid white;
+  box-shadow: 2px 2px 5px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.middle {
+  text-align: center;
+  font-size: 20px;
+  color: steelblue;
+  font-weight: bold;
+}
+
+.left {
+  padding: 20px;
+}
+
+.right {
+  height: auto;
+  padding: 20px;
+  max-width: 400px;
+}
+
+ul {
+  overflow-wrap: break-word;
+}
+
+li {
+  /*list-style: none;*/
+}
+
+.dishData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-top: 0;
+}
+
+#removeDishButton {
+  width: 100%;
+  padding: 5px;
+  margin-top: 4px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  background-color: darkred;
+  cursor: pointer;
+}
