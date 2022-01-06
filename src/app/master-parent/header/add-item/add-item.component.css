@@ -54,6 +54,15 @@ button:active {
     justify-content: center;
 }
 
+#description {
+  width: 400px;
+  max-width: 80vw;
+  margin: 5px;
+  padding: 10px;
+  height: 200px;
+  resize: none;
+}
+
 @media (max-width: 485px) {
     #container {
         width: 100%;

@@ -95,14 +95,14 @@
 #hiddenTools div {
   display: flex;
   align-items: center;
-  height: 40px;
   text-align: center;
+  height: 40px;
   font-size: 20px;
   padding: 0 8px;
   z-index: 50;
 }
 
-#adminView {
+#managerView {
   border-left: 1px solid rgba(255, 255, 255, 0.281);
 }
 
@@ -115,16 +115,20 @@
 @media (max-width: 600px){
 
 
-    #navbar {
+    #navbar, #hiddenTools {
         flex-direction: column;
         height: auto;
         justify-content: center;
         position: unset;
     }
 
-    #hiddenTools {
-      position: unset;
-    }
+    /*#hiddenTools div {*/
+    /*  display: flex;*/
+    /*  padding: 0 5px;*/
+    /*  font-size: 20px!important;*/
+    /*  justify-content: center;*/
+    /*  border-bottom: 1px solid rgba(255, 255, 255, 0.281);*/
+    /*}*/
 
     #details {
         margin-left: unset;
@@ -134,7 +138,7 @@
         font-size: 40px!important;
     }
 
-    #navbar div {
+    #navbar div, #hiddenTools div {
         display: flex;
         padding: 0 5px;
         font-size: 20px!important;
@@ -142,11 +146,15 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.281);
     }
 
+    #hiddenTools div {
+      width: 100%;
+    }
+
     #orderhist {
       margin-left: unset;
     }
 
-    #currency, #shopListButton, #addItemButton, #details {
+    #currency, #shopListButton, #details, #orderhist, #adminView, #managerView {
         border: none;
     }
 

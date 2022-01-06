@@ -34,16 +34,17 @@
   <p class="alert" *ngIf="itemDetails.get('price')!.hasError('min') && (itemDetails.get('price')!.touched || itemDetails.get('price')!.dirty)">Wymagana wartość nieujemna</p>
 
   <label for="description">Opis: </label>
-  <input id="description" type="text" formControlName="description">
+  <textarea id="description" type="text" formControlName="description"></textarea>
   <p class="alert" *ngIf="itemDetails.get('description')!.hasError('required') && (itemDetails.get('description')!.touched || itemDetails.get('description')!.dirty)">Opis jest wymagany</p>
 
   <div formArrayName="ingredients">
       <h2>Składniki</h2>
       <button (click) = "addIngredient()" type = "button">Dodaj kolejny składnik</button>
-      <div *ngFor = "let ingredient of ingredients.controls; let i = index">
+    <div *ngFor = "let ingredient of ingredients.controls; let i = index">
         <label for="ingredient-{{ i }}">Składnik:</label>
         <input id="ingredient-{{ i }}" type="text" [formControlName]="i">
       </div>
+    <button (click) = "removeIngredient()" type = "button">Usuń składnik</button>
   </div>
 
   <div formArrayName="images">
@@ -53,6 +54,7 @@
       <label for="image-{{ i }}">Zdjęcie:</label>
       <input id="image-{{ i }}" type="text" [formControlName]="i">
     </div>
+    <button (click) = "removeImage()" type = "button">Usuń zdjęcie</button>
   </div>
 <div id="buttonContainer">
     <button type="submit" [disabled]="!itemDetails.valid" id = "submitButton">Dodaj potrawę</button>

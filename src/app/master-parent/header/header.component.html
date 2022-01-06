@@ -3,8 +3,6 @@
 </div>
 <div id="navbar">
     <div id="mainView" class="borderclass hoverclass" routerLink="/home" routerLinkActive="active">Główna</div>
-    <div id="addItemButton" class="borderclass hoverclass" routerLink="/new-dish" routerLinkActive="active">
-      Dodaj potrawę</div>
     <div id="addFilterMenu" class="borderclass hoverclass" routerLink="/menu" routerLinkActive="active">Menu</div>
   <div  *ngIf="!authService.userDetails"
     routerLink="/sign-in" class="borderclass hoverclass" routerLinkActive="active">Zaloguj się</div>
@@ -37,10 +35,10 @@
 </div>
 <div id="hiddenTools" *ngIf="
 this.authService.userDetails && this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Admin', 'Manager'])">
+  <div id="managerView" class="borderclass hoverclass" routerLink="manager-view" routerLinkActive="active" >Manager dań</div>
   <div *ngIf="this.authService.checkIfHasRole(this.authService.userDetails.uid, ['Admin'])"
        id="adminView" class="borderclass hoverclass" routerLink="admin-view" routerLinkActive="active">Narzędzia admina
   </div>
-  <div id="managerView" class="borderclass hoverclass" routerLink="manager-view" routerLinkActive="active" >Manager dań</div>
 </div>
 <router-outlet></router-outlet>
 

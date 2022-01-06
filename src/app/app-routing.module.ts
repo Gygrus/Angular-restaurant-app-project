@@ -19,7 +19,6 @@ const appRoutes: Routes = [
     children: [
       {path: "dish-item/:name", component: DishDetailsComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard]}
     ] },
-  { path: 'new-dish', component: AddItemComponent },
   { path: 'shop-list', component: ShopListComponent, data: {roles: ['Client', 'Admin', 'Manager']}, canActivate: [AuthGuard] },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },

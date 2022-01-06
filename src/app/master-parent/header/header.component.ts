@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setCurrency(curr: any){
-    console.log(this.authService.userList, this.authService.userDetails, this.authService.checkIfBanned(this.authService.userDetails), this.authService.afAuth.currentUser);
+    console.log(this.authService.currentPersistence);
     this.curAndShopList.changeCurrency(curr);
     this.filterData.searchMaxPrice = Math.ceil(Number((this.filterData.getMaxPrice()*this.curAndShopList.currencies[curr].value).toFixed(2)));
     this.filterData.searchMinPrice = Math.floor(Number((this.filterData.getMinPrice()*this.curAndShopList.currencies[curr].value).toFixed(2)));

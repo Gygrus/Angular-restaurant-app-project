@@ -7,7 +7,7 @@
       <p>{{dish.name}}</p>
       <p>{{dish.cuisine}}</p>
     </div>
-    <div class="dishData" *ngIf="selectedDish===dish">
+    <div class="dishData" *ngIf="selectedDish && selectedDish.key===dish.key">
       <div class="left">
         <p>Typ dania: {{dish.type}}</p>
         <p>Kategoria: {{dish.category}}</p>

@@ -50,12 +50,24 @@ export class AddItemComponent implements OnInit {
     this.ingredients.push(this.fb.control(''))
   }
 
+  removeIngredient() {
+    if (this.ingredients.length > 1){
+      this.ingredients.removeAt(this.ingredients.length-1);
+    }
+  }
+
   get images() {
     return this.itemDetails.get('images') as FormArray;
   }
 
   addImage() {
     this.images.push(this.fb.control(''));
+  }
+
+  removeImage() {
+    if (this.ingredients.length > 1){
+      this.images.removeAt(this.images.length-1);
+    }
   }
 
   resetMultipleInputs(){

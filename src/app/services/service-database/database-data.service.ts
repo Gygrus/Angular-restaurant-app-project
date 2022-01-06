@@ -11,11 +11,13 @@ import {User} from "../user";
 export class DatabaseDataService {
   dishesList!: Observable<any>;
   usersList!: Observable<any>;
+  persistence!: Observable<any>;
 
 
   constructor(public db: AngularFireDatabase) {
     this.dishesList = this.getDishList();
     this.usersList = this.getUserList();
+    this.persistence = this.db.object('persistence').snapshotChanges();
   }
 
   getUserList() {
@@ -140,5 +142,9 @@ export class DatabaseDataService {
 
   updateDishImages(key: string, value: string){
     this.db.list('dishesList').update(key, {images: value})
+  }
+
+  setPersistence(value: number){
+    this.db.object('persistence').set(value);
   }
 }

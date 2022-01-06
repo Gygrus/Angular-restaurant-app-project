@@ -1,8 +1,9 @@
 <div id="persistence">
   <h3>Ustaw opcje persystencji</h3>
-  <button id="local" class="form-check-input" (click)="setPersistence(localOption)">Local</button>
-  <button id="session" class="form-check-input" (click)="setPersistence(sessionOption)">Session</button>
-  <button id="none" class="form-check-input" (click)="setPersistence(noneOption)">None</button>
+  <button id="local" class="form-check-input" (click)="setPersistence(0)">Local</button>
+  <button id="session" class="form-check-input" (click)="setPersistence(1)">Session</button>
+  <button id="none" class="form-check-input" (click)="setPersistence(2)">None</button>
+  <h3 *ngIf="this.authService.currentPersistence != undefined">Obecna persystencja: {{this.persistenceNames[this.authService.currentPersistence]}}</h3>
 </div>
 
 <div id="userContainer">

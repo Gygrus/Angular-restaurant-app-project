@@ -9,6 +9,7 @@ import firebase from "firebase/compat/app";
 import {Observable, switchMap} from "rxjs";
 import { of } from 'rxjs';
 import {DatabaseDataService} from "../service-database/database-data.service";
+import {persistanceList} from "../../master-parent/header/admin-view/admin-view.component";
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,7 @@ export class AuthService {
   userDetails: firebase.User | null | undefined = null;
   userList: any[] | undefined;
   userRoles: any[] | undefined;
+  currentPersistence: number | undefined;
 
   constructor(public afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -31,6 +33,10 @@ export class AuthService {
       this.userList = e;
       // @ts-ignore
       this.userRoles = e.find((item: { uid: any; }) => item.uid === this.userDetails.uid).roles;
+    })
+    this.db.persistence.subscribe(e => {
+      this.currentPersistence = e.payload.val();
+      this.afAuth.setPersistence(persistanceList[e.payload.val()]);
     })
   }
 

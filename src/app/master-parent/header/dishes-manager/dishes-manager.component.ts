@@ -17,7 +17,6 @@ export class DishesManagerComponent implements OnInit {
   modifiedDish?: Dish;
 
   itemModifyDetails = this.fb.group({
-    // name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), this.duplicateNameValidator.bind(this)]],
     cuisine: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
     type: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
     category: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
@@ -116,7 +115,7 @@ export class DishesManagerComponent implements OnInit {
   }
 
   removeIngredient() {
-    if (this.ingredients.length > 0){
+    if (this.ingredients.length > 1){
       this.ingredients.removeAt(this.ingredients.length-1);
     }
   }
@@ -126,7 +125,7 @@ export class DishesManagerComponent implements OnInit {
   }
 
   removeImage() {
-    if (this.ingredients.length > 0){
+    if (this.ingredients.length > 1){
       this.images.removeAt(this.images.length-1);
     }
   }
