@@ -2,13 +2,14 @@
   margin: auto;
   max-width: 1200px;
   width: 90vw;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 #title {
   font-size: 30px;
   font-weight: bold;
   margin: 20px;
+  text-align: center;
 }
 
 .dishBox {
@@ -17,9 +18,15 @@
   align-items: center;
   flex-direction: column;
   border: 2px solid white;
-  box-shadow: 2px 2px 5px;
+  box-shadow: 1px 1px 10px;
   border-radius: 10px;
   margin: 15px;
+}
+
+.dishBox:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  box-shadow: steelblue 1px 1px 10px;
 }
 
 .middle {
@@ -41,16 +48,29 @@
 
 ul {
   overflow-wrap: break-word;
+  text-align: left;
 }
 
 li {
-  /*list-style: none;*/
+  color: white;
+  background-color: coral;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .dishData {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.dishData p {
+  color: white;
+  background-color: orange;
+  border-radius: 5px;
+  /*display: inline-block;*/
+  padding: 10px;
 }
 
 #buttonWrapper {
@@ -60,13 +80,118 @@ li {
   margin-top: 0;
 }
 
-#removeDishButton {
-  width: 100%;
-  padding: 5px;
-  margin-top: 4px;
+#buttonWrapper button {
+  width: auto;
+  padding: 10px;
+  margin: 10px;
   border-radius: 20px;
   border: none;
   color: white;
-  background-color: darkred;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#removeDishButton {
+  background-color: darkred;
+}
+
+#modifyItemButton {
+  background-color: steelblue;
+}
+
+#modifyItemButton:hover {
+  background-color: lightskyblue;
+}
+
+#removeDishButton:hover {
+  background-color: orange;
+}
+
+.updateData {
+  display: flex;
+  justify-content: space-around;
+}
+
+#container {
+  width: 100%;
+  text-align: center;
+  background-color: dimgrey;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: default;
+}
+
+#container input {
+  margin: 5px;
+}
+
+.updateSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateSection label {
+  background-color: orange;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.updateSection button {
+  background-color: rgb(204, 122, 74);
+  border-radius: 5px;
+  border: none;
+  padding: 7px 14px;
+  margin: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+. updateSection button:hover {
+  background-color: orange;
+  border-color: white;
+}
+
+.alert {
+  color: orange;
+}
+
+#submitButton {
+  background-color: rgb(204, 122, 74);
+  border-radius: 5px;
+  border: none;
+  padding: 7px 14px;
+  color: white;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: orange;
+  border-color: white;
+}
+
+#submitButton:disabled {
+  cursor: not-allowed;
+  background-color: grey;
+}
+
+#description {
+  margin: 5px;
+  padding: 10px;
+  height: 200px;
+  resize: none;
+}
+
+@media (max-width: 700px) {
+  .dishData {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right p {
+    text-align: center;
+  }
 }

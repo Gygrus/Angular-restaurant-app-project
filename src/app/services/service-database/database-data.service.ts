@@ -105,4 +105,40 @@ export class DatabaseDataService {
     const dishList = this.db.list('dishesList');
     dishList.update(key, {ordered: value});
   }
+
+  updateDishName(key: string, value: string){
+    this.db.list('dishesList').update(key, {name: value})
+  }
+
+  updateDishCuisine(key: string, value: string){
+    this.db.list('dishesList').update(key, {cuisine: value})
+  }
+
+  updateDishType(key: string, value: string){
+    this.db.list('dishesList').update(key, {type: value})
+  }
+
+  updateDishCategory(key: string, value: string){
+    this.db.list('dishesList').update(key, {category: value})
+  }
+
+  updateDishIngredients(key: string, value: string){
+    this.db.list('dishesList').update(key, {ingredients: value})
+  }
+
+  updateDishQuantity(key: string, value: string){
+    this.db.list('dishesList').update(key, {quantity: value})
+  }
+
+  updateDishPrice(key: string, value: string){
+    this.db.list('dishesList').update(key, {price: value})
+  }
+
+  updateDishDescription(key: string, value: string){
+    this.db.list('dishesList').update(key, {description: value})
+  }
+
+  updateDishImages(key: string, value: string){
+    this.db.list('dishesList').update(key, {images: value})
+  }
 }

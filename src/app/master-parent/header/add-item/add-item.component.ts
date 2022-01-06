@@ -58,9 +58,19 @@ export class AddItemComponent implements OnInit {
     this.images.push(this.fb.control(''));
   }
 
+  resetMultipleInputs(){
+    while (this.ingredients.length > 1){
+      this.ingredients.removeAt(this.ingredients.length-1);
+    }
+    while (this.images.length > 1){
+      this.images.removeAt(this.images.length-1);
+    }
+  }
+
   onSubmit() {
     this.addItem(this.itemDetails.value);
     this.itemDetails.reset();
+    this.resetMultipleInputs();
     this.filterData.resetAll();
     this.paginInfo.setDishes();
   }

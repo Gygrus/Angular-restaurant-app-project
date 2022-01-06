@@ -1,12 +1,13 @@
 <app-add-item></app-add-item>
 <div id="dishesContainer">
   <div id="title">Potrawy</div>
-  <div *ngFor="let dish of Dishes.dishList" class="dishBox">
+  <div *ngFor="let dish of Dishes.dishList" class="dishBox"
+  (click)="setDish(dish)">
     <div class="middle">
       <p>{{dish.name}}</p>
       <p>{{dish.cuisine}}</p>
     </div>
-    <div class="dishData">
+    <div class="dishData" *ngIf="selectedDish===dish">
       <div class="left">
         <p>Typ dania: {{dish.type}}</p>
         <p>Kategoria: {{dish.category}}</p>
@@ -29,7 +30,81 @@
     </div>
     <div id="buttonWrapper">
       <button id="removeDishButton"
-              (click)="removeDish(dish)">Remove</button>
+              (click)="removeDish(dish)">Usuń
+      </button>
+      <button id="modifyItemButton"
+              (click)="setModifiedDish(dish, $event)">Zmodyfikuj
+      </button>
     </div>
+    <form [formGroup]="itemModifyDetails"
+          (ngSubmit) = "onSubmit()"
+          id="container"
+          *ngIf="modifiedDish && modifiedDish.key === dish.key"
+    (click)="$event.stopPropagation()">
+      <h2>Zmień danie</h2>
+      <div class="updateData">
+        <div class="updateSection">
+          <label for="name">Nazwa: </label>
+          <input id="name" type="text" formControlName="name" [value]="this.itemModifyDetails.get('name')">
+          <p class="alert" *ngIf="itemModifyDetails.get('name')!.hasError('duplicateName')">Nazwa już istnieje</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('name')!.hasError('required') && (itemModifyDetails.get('name')!.touched || itemModifyDetails.get('name')!.dirty)">Nazwa jest wymagana</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('name')!.hasError('pattern') && (itemModifyDetails.get('name')!.touched || itemModifyDetails.get('name')!.dirty)">Niedozwolone znaki</p>
+
+          <label for="cuisine">Kuchnia: </label>
+          <input id="cuisine" type="text" formControlName="cuisine" [value]="this.itemModifyDetails.get('cuisine')">
+          <p class="alert" *ngIf="itemModifyDetails.get('cuisine')!.hasError('required') && (itemModifyDetails.get('cuisine')!.touched || itemModifyDetails.get('cuisine')!.dirty)">Kuchnia jest wymagana</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('cuisine')!.hasError('pattern') && (itemModifyDetails.get('cuisine')!.touched || itemModifyDetails.get('cuisine')!.dirty)">Niedozwolone znaki</p>
+
+          <label for="type">Typ dania: </label>
+          <input id="type" type="text" formControlName="type" [value]="this.itemModifyDetails.get('type')">
+          <p class="alert" *ngIf="itemModifyDetails.get('type')!.hasError('required') && (itemModifyDetails.get('type')!.touched || itemModifyDetails.get('type')!.dirty)">Typ dania jest wymagany</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('type')!.hasError('pattern') && (itemModifyDetails.get('type')!.touched || itemModifyDetails.get('type')!.dirty)">Niedozwolone znaki</p>
+
+          <label for="category">Kategoria: </label>
+          <input id="category" type="text" formControlName="category" [value]="this.itemModifyDetails.get('category')">
+          <p class="alert" *ngIf="itemModifyDetails.get('category')!.hasError('required') && (itemModifyDetails.get('category')!.touched || itemModifyDetails.get('category')!.dirty)">Kategoria jest wymagana</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('category')!.hasError('pattern') && (itemModifyDetails.get('category')!.touched || itemModifyDetails.get('category')!.dirty)">Niedozwolone znaki</p>
+
+          <label for="quantity">Ilość: </label>
+          <input id="quantity" type="number" formControlName="quantity" [value]="this.itemModifyDetails.get('quantity')">
+          <p class="alert" *ngIf="itemModifyDetails.get('quantity')!.hasError('required') && (itemModifyDetails.get('quantity')!.touched || itemModifyDetails.get('quantity')!.dirty)">Ilość jest wymagana</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('quantity')!.hasError('min') && (itemModifyDetails.get('quantity')!.touched || itemModifyDetails.get('quantity')!.dirty)">Wymagana wartość nieujemna</p>
+
+          <label for="price">Cena: </label>
+          <input id="price" type="number" formControlName="price" [value]="this.itemModifyDetails.get('price')">
+          <p class="alert" *ngIf="itemModifyDetails.get('price')!.hasError('required') && (itemModifyDetails.get('price')!.touched || itemModifyDetails.get('price')!.dirty)">Cena jest wymagana</p>
+          <p class="alert" *ngIf="itemModifyDetails.get('price')!.hasError('min') && (itemModifyDetails.get('price')!.touched || itemModifyDetails.get('price')!.dirty)">Wymagana wartość nieujemna</p>
+        </div>
+        <div class="updateSection">
+          <label for="description">Opis: </label>
+          <textarea id="description" type="text" formControlName="description"></textarea>
+          <p class="alert" *ngIf="itemModifyDetails.get('description')!.hasError('required') && (itemModifyDetails.get('description')!.touched || itemModifyDetails.get('description')!.dirty)">Opis jest wymagany</p>
+
+          <div formArrayName="ingredients">
+            <h2>Składniki</h2>
+            <button (click) = "addIngredient()" type = "button">Dodaj kolejny składnik</button>
+            <button (click) = "removeIngredient()" type = "button">Usuń składnik</button>
+            <div *ngFor = "let ingredient of ingredients.controls; let i = index">
+              <label for="ingredient-{{ i }}">Składnik:</label>
+              <input id="ingredient-{{ i }}" type="text" [formControlName]="i" [value]="ingredient">
+            </div>
+          </div>
+
+          <div formArrayName="images">
+            <h2>Zdjęcia</h2>
+            <button (click) = "addImage()" type = "button">Dodaj kolejne zdjęcie</button>
+            <button (click) = "removeImage()" type = "button">Usuń ostatnie zdjęcie</button>
+            <div *ngFor = "let image of images.controls; let i = index">
+              <label for="image-{{ i }}">Zdjęcie:</label>
+              <input id="image-{{ i }}" type="text" [formControlName]="i" [value]="image">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="buttonContainer">
+        <button type="submit" [disabled]="!itemModifyDetails.valid" id = "submitButton">Zaktualizuj</button>
+      </div>
+    </form>
   </div>
+
 </div>
