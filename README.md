@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Opis 
 
-Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetowych", mający na celu realizować funkcjonalności strony internetowej przykładowej restauracji. Projekt ten został napisany przy użyciu framework'u webowego Angular oraz bazy danych realtime database ze strony Firebase.
+Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetowych", mający na celu realizować funkcjonalności strony internetowej przykładowej restauracji. Projekt ten został napisany przy użyciu framework'u webowego Angular oraz bazy danych realtime database ze strony Firebase. W bazie realtime database przechowywane są informacje o potrawach, użytkownikach oraz statusie persystencji
 
 ### Podstawowe funkcjonalności 
 
@@ -28,4 +28,22 @@ Ma dostęp do widoku strony startowej strony, może przeglądać ofertę oraz fi
 
 #### Użytkownik Client
 
+Klient może przeglądać dania oraz rezerwować oferty zapisując je do swojego koszyka. Może oceniać i zostawiać komentarze ale tylko dla ofert z których 
+korzystał. 
 
+#### Użytkownik Manager
+
+Manager może modyfikować ofertę – dodając, modyfikując lub usuwając pozycje menu. Nie 
+może oceniać potraw. Może zostawiać komentarze dla wszytkich ofert. 
+
+#### Użytkownik Admin
+
+Admin oprócz modyfikacji oferty może dodatkowo przeglądać listę zarejestrowanych 
+użytkowników w specjalnym panelu admina widocznym tylko dla niego. Ma możliwość banowania użytkownika. Zbanowanie oznacza, że użytkownik nie 
+może zostawiać komentarzy ani oceniać potraw. Admin może ponadto przypisywać role użytkownikom.
+
+####
+
+Zarówno Admin jak i Manager mają dostęp do panelu Managera Dań, gdzie można edytować daną ofertę, bądź też dodać nową pozycję.
+
+Odpowiednie widoki zostały ukryte dla nieautoryzowanych użytkowników za pomocą AuthGuard'a, więc nie można dostać się do danego widoku po prostu wpisując odpowiedni adres. Zastosowany został również routing
