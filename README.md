@@ -26,6 +26,8 @@ Zrealizowany został podział na użytkowników wraz z autentykacją przy użyci
 
 Ma dostęp do widoku strony startowej strony, może przeglądać ofertę oraz filtrować ją, jednak aby zamówić danie musi się zalogować bądź zarejestrować
 
+![HomeView](/images/Widok Home.jpg)
+
 #### Użytkownik Client
 
 Klient może przeglądać dania oraz rezerwować oferty zapisując je do swojego koszyka. Może oceniać i zostawiać komentarze ale tylko dla ofert z których 
