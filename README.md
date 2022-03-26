@@ -42,7 +42,7 @@ Admin oprócz modyfikacji oferty może dodatkowo przeglądać listę zarejestrow
 użytkowników w specjalnym panelu admina widocznym tylko dla niego. Ma możliwość banowania użytkownika. Zbanowanie oznacza, że użytkownik nie 
 może zostawiać komentarzy ani oceniać potraw. Admin może ponadto przypisywać role użytkownikom.
 
-####
+##
 
 Zarówno Admin jak i Manager mają dostęp do panelu Managera Dań, gdzie można edytować daną ofertę, bądź też dodać nową pozycję.
 
