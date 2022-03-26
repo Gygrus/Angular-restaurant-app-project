@@ -14,14 +14,18 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Opis 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetowych", mający na celu realizować funkcjonalności strony internetowej przykładowej restauracji. Projekt ten został napisany przy użyciu framework'u webowego Angular oraz bazy danych realtime database ze strony Firebase.
 
-## Running end-to-end tests
+### Podstawowe funkcjonalności 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Zrealizowany został podział na użytkowników wraz z autentykacją przy użyciu api Firebase. 
 
-## Further help
+#### Użytkownik niezalogowany
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ma dostęp do widoku strony startowej strony, może przeglądać ofertę oraz filtrować ją, jednak aby zamówić danie musi się zalogować bądź zarejestrować
+
+#### Użytkownik Client
+
+
