@@ -22,16 +22,38 @@ Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetow
 
 Zrealizowany został podział na użytkowników wraz z autentykacją przy użyciu api Firebase. Zaimplementowane zostało logowanie, rejestracja i wylogowywanie w oparciu o moduł AngularFireAuth.
 
+Widok rejestracji
+![SignIn](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20rejestracji.jpg)
+
+Widok logowania
+![LogIn](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20logowania.jpg)
+
+
 #### Użytkownik niezalogowany
 
-Ma dostęp do widoku strony startowej strony, może przeglądać ofertę oraz filtrować ją, jednak aby zamówić danie musi się zalogować bądź zarejestrować
+Ma dostęp do widoku strony startowej strony, może przeglądać ofertę oraz filtrować ją, jednak aby zamówić danie musi się zalogować bądź zarejestrować.
 
+Widok strony startowej
 ![HomeView](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20Home.jpg)
+
+Widok Menu
+![MenuView](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20Menu.png)
+
 
 #### Użytkownik Client
 
-Klient może przeglądać dania oraz rezerwować oferty zapisując je do swojego koszyka. Może oceniać i zostawiać komentarze ale tylko dla ofert z których 
+Klient może przeglądać dania oraz rezerwować oferty zapisując je do swojego koszyka. Zamówione dania zostaną dodane do historii zamówień. Może oceniać i zostawiać komentarze ale tylko dla ofert z których 
 korzystał. 
+
+Widok szczegółów dania
+![DishDetails1](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/widok%20szczegolow%20dania%201.png)
+![DishDetails2](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/widok%20szczegolow%20daniia%202.jpg)
+
+Widok koszyka
+![Cart](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20koszyka.jpg)
+
+Widok historii zamówień
+![DishHistory](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20historii%20zam%C3%B3wie%C5%84.jpg)
 
 #### Użytkownik Manager
 
@@ -44,9 +66,15 @@ Admin oprócz modyfikacji oferty może dodatkowo przeglądać listę zarejestrow
 użytkowników w specjalnym panelu admina widocznym tylko dla niego. Ma możliwość banowania użytkownika. Zbanowanie oznacza, że użytkownik nie 
 może zostawiać komentarzy ani oceniać potraw. Admin może ponadto przypisywać role użytkownikom.
 
+![AdminPanel](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20panelu%20admina.png)
+
+
 ##
 
 Zarówno Admin jak i Manager mają dostęp do panelu Managera Dań, gdzie można edytować daną ofertę, bądź też dodać nową pozycję.
+
+![DishManager](https://github.com/Gygrus/Angular-restaurant-app-project/blob/master/images/Widok%20managera%20da%C5%84.jpg)
+
 
 Odpowiednie widoki zostały ukryte dla nieautoryzowanych użytkowników za pomocą AuthGuard'a, więc nie można dostać się do danego widoku po prostu wpisując odpowiedni adres. Zastosowany został również routing
 
