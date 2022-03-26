@@ -16,11 +16,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Opis 
 
-Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetowych", mający na celu realizować funkcjonalności strony internetowej przykładowej restauracji. Projekt ten został napisany przy użyciu framework'u webowego Angular oraz bazy danych realtime database ze strony Firebase. W bazie realtime database przechowywane są informacje o potrawach, użytkownikach oraz statusie persystencji
+Jest to projekt zrealizowany od zera na zajęcia "Wstęp do aplikacji internetowych", mający na celu realizować funkcjonalności strony internetowej przykładowej restauracji. Projekt ten został napisany przy użyciu framework'u webowego Angular oraz bazy danych realtime database ze strony Firebase. W bazie realtime database przechowywane są informacje o potrawach, użytkownikach oraz statusie persystencji.
 
 ### Podstawowe funkcjonalności 
 
-Zrealizowany został podział na użytkowników wraz z autentykacją przy użyciu api Firebase. 
+Zrealizowany został podział na użytkowników wraz z autentykacją przy użyciu api Firebase. Zaimplementowane zostało logowanie, rejestracja i wylogowywanie w oparciu o moduł AngularFireAuth.
 
 #### Użytkownik niezalogowany
 
@@ -47,3 +47,14 @@ może zostawiać komentarzy ani oceniać potraw. Admin może ponadto przypisywa�
 Zarówno Admin jak i Manager mają dostęp do panelu Managera Dań, gdzie można edytować daną ofertę, bądź też dodać nową pozycję.
 
 Odpowiednie widoki zostały ukryte dla nieautoryzowanych użytkowników za pomocą AuthGuard'a, więc nie można dostać się do danego widoku po prostu wpisując odpowiedni adres. Zastosowany został również routing
+
+##
+### Dodatkowe funkcjonalności
+
+- własna implementacja paginacji
+- możliwość ustawienia trybu persystencji
+- możliwość zmiany waluty
+- slider zdjęć po wejściu w szczegóły dania (tylko dla zalogowanych użytkowników)
+- ocenianie dań i komentowanie
+- przeglądanie historii zamówień
+- filtrowanie dań na podstawie wpisanej nazwy, przedziału cenowego, kategorii itp.
