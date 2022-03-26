@@ -12,7 +12,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Aby uruchomić projekt na swoim komputerze musimy mieć zainstalowany Angular, menedżer pakietów npm oraz zainstalować pliki z tego repozytorium. W folderze z plikami po uruchomieniu konsoli wpisujemy:
+`npm install` - instaluje wszystkie zależności użyte w projekcie
+`ng serve --open` - uruchamia projekt
 
 ## Opis 
 
